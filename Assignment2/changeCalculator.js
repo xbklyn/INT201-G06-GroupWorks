@@ -1,4 +1,4 @@
-const Notes = {         //สร้าง object notes เพื่อเก็ฐค่าแบงค์และจำนวนแบงค์ที่มีอยู่
+const Notes = {         //สร้าง object notes เพื่อเก็บค่าแบงค์และจำนวนแบงค์ที่มีอยู่
     "500-Notes": 0,
     "100-Notes": 0,
     "50-Notes": 0,
@@ -8,11 +8,11 @@ const Notes = {         //สร้าง object notes เพื่อเก็�
     "2-Notes": 0,
     "1-Notes": 0,
     add(key, value) { Notes[`${key}-Notes`] += value; }, //function สำหรับเพิ่มแบงค์ใน Notes
-    remove(key) { Notes[`${key}-Notes`] -= 1; }, //function สำหรับนำบงค์ออกจาก Notes
+    remove(key) { Notes[`${key}-Notes`] -= 1; }, //function สำหรับนำแบงค์ออกจาก Notes
     check(key) { return Notes[`${key}-Notes`] > 0; } //
 }
 
-function changeCalculation(totalPrice, moneyFromCustomer) {
+function changeCalculation(totalPrice, moneyFromCustomer) { //function ที่ใช้คำนวณเงินทอนโดยใส่ราคาสินค้าทั้งหมดและเงินที่ลูกค้าชำระ
     let changes = { change: moneyFromCustomer - totalPrice };
     let totalChange = changes.change;
 
