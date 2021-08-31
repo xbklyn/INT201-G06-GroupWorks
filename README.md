@@ -1,6 +1,6 @@
 # INT201-G06
 
-## About Us
+### Group member
 
 | No. | Name              | Student ID   |
 |:---:|-------------------|--------------|
@@ -10,7 +10,7 @@
 |  4  | name  | 63130500xxx |
 |  5  | name  | 63130500xxx |
 
-Instructor [AJ umaporn](https://github.com/umaporn-sup)
+Instructor: [AJ umaporn](https://github.com/umaporn-sup)
 
 
 
