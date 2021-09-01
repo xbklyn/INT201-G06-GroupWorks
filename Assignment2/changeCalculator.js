@@ -27,7 +27,7 @@ function changeCalculation(totalPrice, moneyFromCustomer){ //funtion ที่�
                 }
             }
             if(totalChange > 0 ) changes[`1-Change`] = totalChange;
-        }else return `No change !`
+        }else if(moneyFromCustomer == totalPrice)   return `No change !`; else return `Not enough money`
     return changes
 }
 
