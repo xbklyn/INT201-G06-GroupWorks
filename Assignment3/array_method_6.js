@@ -5,6 +5,7 @@ const days = ["Sun", "Mon", "Tue"];
 days.splice(days.length, 0, ...temp);
 // inserts all elements of "temp" at index 3
 console.log(days);
+// expected output: Array ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
 
 months.splice(1, 0, "Feb");
 // inserts at index 1
