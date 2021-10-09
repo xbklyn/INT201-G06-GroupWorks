@@ -32,3 +32,4 @@ console.log(months);
 months.splice(1);
 // deletes all elements from index 1
 console.log(months);
+// expected output: Array ["Jan"]
