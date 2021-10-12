@@ -27,21 +27,9 @@ months.splice(1);
 console.log(months);
 // expected output: Array ["Jan"]
 
-const arr = [2, 6, 8, 15, 9, 12, 5, 4];
-
-function divideArray(arr) {
-	let result = [];
-	if (arr === null || arr === undefined) {
-		return -1;
-	}
-	if (arr.length <= 1) {
-		return arr;
-	} else {
-		let temp = arr.splice(Math.trunc(arr.length / 2));
-		result.push(...temp);
-		return [arr, result];
-	}
-}
-
-console.log(days);
-console.log(divideArray(days));
+let numbers = [15, 62, 0, 9]
+let removed_value = numbers.splice(-3, 2)
+console.log(numbers);
+// expected output: Array [15, 9]
+console.log(removed_value);
+// delete value: Array [62, 0]
