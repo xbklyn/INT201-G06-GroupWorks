@@ -22,13 +22,13 @@ console.log(lib.arrayOperator(div_arr, lib.sumDivArray));
 
 import * as lib from "./modules/func_p1.js";
 
-const numbers = ["A", 1, 2, 3, "B", "C"];
+const words = ["A", 1, 2, 3, "B", "C"];
 
-console.log(numbers);
+console.log(words);
 console.log();
 
-let div_arr_function = lib.divArray(numbers);
-let div_arr = div_arr_function(numbers);
+let div_arr_function = lib.divArray(words);
+let div_arr = div_arr_function(words);
 console.log(div_arr);
 
 console.log(lib.arrayOperator(div_arr, lib.sumDivArray));
