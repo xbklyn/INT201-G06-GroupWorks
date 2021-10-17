@@ -1,4 +1,5 @@
 // test cases of part 1 with import of part 2
+// case 1
 
 import * as lib from "./modules/func_p1.js";
 
