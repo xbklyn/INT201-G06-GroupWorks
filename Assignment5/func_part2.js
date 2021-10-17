@@ -1,4 +1,4 @@
-import * as lib from './func_part2_export.js';
+import * as lib from './func_part1.js';
 
 //
 console.log(lib.numbers);
