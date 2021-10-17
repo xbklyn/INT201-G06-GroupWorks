@@ -39,3 +39,8 @@ let div_arr = div_arr_function(numbers);
 console.log(div_arr);
 
 console.log(sumDivideArray(div_arr, sumDiv));
+//export
+export { divideArray };
+export { sumDiv };
+export { sumDivideArray };
+export { numbers };
