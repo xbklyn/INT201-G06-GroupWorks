@@ -1,6 +1,8 @@
-const numbers = [2, 6, 8, 1, 9, 12, 5, 4, 6, 5, 0, -5, -9];
+// functions of part 1 with export part 2
 
-function divideArray(arr = []) {
+const testNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+function divArray(arr = []) {
 	if (arr === null || arr === undefined) {
 		return -1;
 	}
@@ -17,25 +19,16 @@ function divideArray(arr = []) {
 	}
 }
 
-function sumDiv([div_arr1, div_arr2]) {
+function sumDivArray([div_arr1, div_arr2]) {
 	let output = [];
 	output.push(div_arr1.reduce((total, value) => total + value));
 	output.push(div_arr2.reduce((total, value) => total + value));
 	return output;
 }
 
-function sumDivideArray(div_arr, fn) {
-	return fn(div_arr);
+function arrayOperator(arr, fn) {
+	return fn(arr);
 }
 
-console.log(numbers);
-console.log();
-
-console.log(divideArray());
-console.log();
-
-let div_arr_function = divideArray(numbers);
-let div_arr = div_arr_function(numbers);
-console.log(div_arr);
-
-console.log(sumDivideArray(div_arr, sumDiv));
+// export section
+export { testNumbers as default, divArray, sumDivArray, arrayOperator };
