@@ -9,7 +9,7 @@ function divArray(arr = []) {
 	if (arr.length <= 1) {
 		return arr;
 	} else {
-		function divide(array) {
+		function divide(array = arr) {
 			let div_arr = [];
 			let temp = array.splice(Math.trunc(array.length / 2));
 			div_arr.push(...temp);
@@ -17,6 +17,19 @@ function divArray(arr = []) {
 		}
 		return divide;
 	}
+}
+
+function setArray(arr) {
+	function greaterThan(number) {
+		let result = [];
+		arr.forEach((i) => {
+			if (i > number) {
+				result.push(i);
+			}
+		});
+		return result;
+	}
+	return greaterThan;
 }
 
 function sumDivArray([div_arr1, div_arr2]) {
@@ -31,4 +44,10 @@ function arrayOperator(arr, fn) {
 }
 
 // export section
-export { testNumbers as default, divArray, sumDivArray, arrayOperator };
+export {
+	testNumbers as default,
+	divArray,
+	sumDivArray,
+	arrayOperator,
+	setArray,
+};

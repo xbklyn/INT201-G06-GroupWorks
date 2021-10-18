@@ -14,7 +14,7 @@ console.log(lib.divArray());
 console.log();
 
 let div_arr_function = lib.divArray(numbers);
-let div_arr = div_arr_function(numbers);
+let div_arr = div_arr_function();
 //กำหนดการใช้ function divArray
 console.log(div_arr);
 
@@ -47,3 +47,9 @@ console.log();
 
 console.log(lib.sumDivArray(numbers));
 //แสดงผลลัพธ์โดยการใช้ function sumDivArray
+
+// case 4
+
+let greaterThan = lib.setArray(numbers);
+let result = greaterThan(5);
+console.log(result);
