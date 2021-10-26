@@ -8,69 +8,43 @@ import Monitor from "./monitor.js";
 const products = [];
 
 products.push(new Monitor(1, "BENQ ZOWIE XL2731", 27, "1920x1080"));
+products[0]._price = 9900;
+products[0]._stock = 20;
+products[0]._imgURL = "./images/ZOWIE-XL2731.jpg";
+
 products.push(new Monitor(2, "BENQ MOBIUZ EX3415R", 34, "3440x1440"));
+products[1]._price = 35900;
+products[1]._stock = 5;
+products[1]._imgURL = "./images/MOBIUZ-EX3415R.jpg";
+
 products.push(new Monitor(3, "BENQ MOBIUZ EX2710R", 27, "2560x1440"));
-products.push(new Monitor(4, "BENQ MOBIUZ EW2780Q", 27, "2560x1440"));
-console.log(products);
+products[2]._price = 21900;
+products[2]._stock = 10;
+products[2]._imgURL = "./images/MOBIUZ-EX2710R.jpg";
 
-// add products here
-const prod = [
-	{
-		price: 9900,
-		stock: 0,
-		imageURL: "../images/ZOWIE-XL2731",
-	},
-	{
-		price: 35900,
-		stock: 0,
-		imageURL: "../images/MOBIUZ-EX3415R",
-	},
-	{
-		price: 21900,
-		stock: 0,
-		imageURL: "../images/MOBIUZ-EX2710R",
-	},
-	{
-		price: 9500,
-		stock: 0,
-		imageURL: "../images/EW2780Q",
-	},
-	{
-		code: 5,
-		name: "BENQ EW2480",
-		size: 24,
-		resolution: "1920 x 1080",
-		price: 5500,
-		stock: 0,
-		imageURL: "../images/EW2480",
-	},
-	{
-		code: 6,
-		name: "BENQ EX3203R",
-		size: 31.5,
-		resolution: "2560 x 1440",
-		price: 16900,
-		stock: 0,
-		imageURL: "../images/EX3203R",
-	},
-	{
-		code: 7,
-		name: "BENQ ZOWIE XL2546",
-		size: 24.5,
-		resolution: "1920 x 1080",
-		price: 15900,
-		stock: 0,
-		imageURL: "../images/ZOWIE-XL2546",
-	},
-	{
-		code: 8,
-		name: "BENQ GW2780",
-		size: 27,
-		resolution: "1920 x 1080",
-		price: 5900,
-		stock: 0,
-		imageURL: "../images/GW2780",
-	},
-];
+products.push(new Monitor(4, "BENQ EW2780Q", 27, "2560x1440"));
+products[3]._price = 9500;
+products[3]._stock = 15;
+products[3]._imgURL = "./images/EW2780Q.jpg";
 
-export { products };
+products.push(new Monitor(5, "BENQ EW2480", 24, "1920x1080"));
+products[4]._price = 5500;
+products[4]._stock = 22;
+products[4]._imgURL = "./images/EW2480.jpg";
+
+products.push(new Monitor(6, "BENQ EX3203R", 31.5, "2560x1440"));
+products[5]._price = 16900;
+products[5]._stock = 2;
+products[5]._imgURL = "./images/EX3203R.jpg";
+
+products.push(new Monitor(7, "BENQ ZOWIE XL2546", 24.5, "1920x1080"));
+products[6]._price = 15900;
+products[6]._stock = 7;
+products[6]._imgURL = "./images/ZOWIE-XL2546.jpg";
+
+products.push(new Monitor(8, "BENQ GW2780", 27, "1920x1080"));
+products[7]._price = 5900;
+products[7]._stock = 11;
+products[7]._imgURL = "./images/GW2780.jpg";
+
+export { products as default };
