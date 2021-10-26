@@ -1,10 +1,10 @@
 ## Work ratio
 
 1. A: 10%
-    1. asd
-    2. asd
+    - asd
+    - asd
 2. B: 10%
-    1. asd
-    2. asd
+    - asd
+    - asd
 3. C: 20%
-    1. sds
+    - sds
