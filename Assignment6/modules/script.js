@@ -1,21 +1,27 @@
 // html management file
-
+// tan add script
 import products from "./products.js";
 
 // code here
 let body = document.querySelector("body.product-list");
-let divNode = new Array(products.length);
 
-for (let i = 0; i < products.length; i++) {
-    let div = document.createElement("div");
-    div.id = products[i].code;
-    div.setAttribute("name", products[i].name);
-    divNode[i] = div;
-}
+let divContainer = document.createElement("div");
+divContainer.className = "product-container";
 
-for (let j = 0; j < divNode.length; j++) {
-    let child = body.appendChild(divNode[j]);
+// add container to body
+let container = body.appendChild(divContainer);
+
+for (const product of products) {
+    // add div to container in body
+    let divList = document.createElement("div");
+    divList.id = product.code;
+    divList.className = "product-item";
+    let divItem = container.appendChild(divList);
+
+    // add img to div in container
     let img = document.createElement("img");
-    img.src = products[j].imgURL;
-    child.appendChild(img);
+    img.src = product.imgURL;
+    img.alt = product.name;
+    img.style = "width: 30%; height: 30%;";
+    divItem.appendChild(img);
 }
