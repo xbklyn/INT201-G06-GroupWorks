@@ -24,4 +24,25 @@ for (const product of products) {
     img.alt = product.name;
     img.style = "width: 30%; height: 30%;";
     divItem.appendChild(img);
+
+    // add Description to div in container
+    let divDesc = document.createElement("div");
+    
+    let name = document.createElement("div");
+    name.class = "name";
+    name.innerHTML = `<b>Name</b> : ${product.name} ${product.size}"`;
+    divDesc.appendChild(name);
+
+    let price = document.createElement("div");
+    price.class = "price";
+    price.innerHTML = `<b>Price</b> : ${product.price}`;
+    divDesc.appendChild(price);
+
+    let res = document.createElement("div");
+    res.class = "resolution";
+    res.innerHTML = `<b>Resolution</b> : ${product.resolution}`;
+    divDesc.appendChild(res);
+
+
+    divItem.appendChild(divDesc);
 }
