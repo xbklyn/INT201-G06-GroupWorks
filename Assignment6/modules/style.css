@@ -331,7 +331,6 @@ summary {
 blockquote,
 dl,
 dd,
-h1,
 h2,
 h3,
 h4,
@@ -491,7 +490,7 @@ table {
   border-collapse: collapse;
 }
 
-h1,
+
 h2,
 h3,
 h4,
@@ -499,6 +498,14 @@ h5,
 h6 {
   font-size: inherit;
   font-weight: inherit;
+}
+
+h1 {
+  display: block;
+  font-family: Monospace;
+  font-size: 3em;
+  text-align: center;
+  font-weight: bold;
 }
 
 /**
