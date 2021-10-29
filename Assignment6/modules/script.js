@@ -1,7 +1,7 @@
 // html management file
 // tan add script
 // nut add description
-// someone adds css, pls type your nickname
+// max add css
 
 import products from "./products.js";
 
