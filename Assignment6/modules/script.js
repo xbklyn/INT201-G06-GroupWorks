@@ -11,24 +11,26 @@ divContainer.className = "product-container";
 
 // add container to body
 let container = body.appendChild(divContainer);
+container.className = "grid grid-cols-5";
 
 for (const product of products) {
     // add div to container in body
     let divList = document.createElement("div");
     divList.id = product.code;
-    divList.className = "product-item w-auto";
+    divList.className = "flex flex-col bg-white rounded-lg shadow-md m-5";
     let divItem = container.appendChild(divList);
 
     // add img to div in container
     let img = document.createElement("img");
     img.src = product.imgURL;
     img.alt = product.name;
-    img.style = "width: 30%; height: 30%;";
+    img.style = "width: 100%; height: 100%;";
     divItem.appendChild(img);
 
     // add Description to div in container
     let divDesc = document.createElement("div");
-    
+    divDesc.className = "p-2";
+
     let name = document.createElement("div");
     name.className = "bg-green-100 font-mono flex-1";
     name.innerHTML = `<b>Name</b> : ${product.name} ${product.size}"`;
