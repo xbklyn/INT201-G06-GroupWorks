@@ -9,7 +9,7 @@ const products = [];
 
 products.push(new Monitor(1, "BENQ ZOWIE XL2731", 27, "1920x1080"));
 products[0]._price = 9900;
-products[0]._stock = 20;
+products[0]._stock = 0;
 products[0]._imgURL = "./images/ZOWIE-XL2731.jpg";
 
 products.push(new Monitor(2, "BENQ MOBIUZ EX3415R", 34, "3440x1440"));
@@ -44,7 +44,7 @@ products[6]._imgURL = "./images/ZOWIE-XL2546.jpg";
 
 products.push(new Monitor(8, "BENQ GW2780", 27, "1920x1080"));
 products[7]._price = 5900;
-products[7]._stock = 11;
+products[7]._stock = 0;
 products[7]._imgURL = "./images/GW2780.jpg";
 
 export { products as default };

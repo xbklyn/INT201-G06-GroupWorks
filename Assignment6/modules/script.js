@@ -1,55 +1,74 @@
 // html management file
 // tan add script
-//nut add description 
+// nut add description
+// someone adds css, pls type your nickname
+
 import products from "./products.js";
 
 // code here
-let body = document.querySelector("body.product-list");
+let body = document.querySelector("body");
+body.className = "product-list p-6 bg-blue-50";
+
+// add h1 to body
+let title = document.createElement("h1");
+title.className = "font-bold text-xl text-center";
+title.textContent = "Product List";
+body.appendChild(title);
 
 let divContainer = document.createElement("div");
-divContainer.className = "product-container";
+divContainer.className = "product-container grid grid-cols-5";
 
 // add container to body
 let container = body.appendChild(divContainer);
-container.className = "grid grid-cols-5";
 
 for (const product of products) {
-    // add div to container in body
-    let divList = document.createElement("div");
-    divList.id = product.code;
-    divList.className = "flex flex-col bg-white rounded-lg shadow-md m-5";
-    let divItem = container.appendChild(divList);
+	// add div to container in body
+	let divList = document.createElement("div");
+	divList.id = product.code;
+	divList.className = "flex flex-col bg-white rounded-lg shadow-md m-5";
+	divList.setAttribute("name", product.name);
+	let divItem = container.appendChild(divList);
 
-    // add img to div in container
-    let img = document.createElement("img");
-    img.src = product.imgURL;
-    img.alt = product.name;
-    img.style = "width: 100%; height: 100%;";
-    divItem.appendChild(img);
+	// add img to div in container
+	let img = document.createElement("img");
+	img.src = product.imgURL;
+	img.alt = product.name;
+	img.style = "width: 100%; height: 100%;";
+	divItem.appendChild(img);
 
-    // add Description to div in container
-    let divDesc = document.createElement("div");
-    divDesc.className = "p-2";
+	// add details to div in container
+	let divDetails = document.createElement("div");
+	divDetails.className = "details p-2";
 
-    let name = document.createElement("div");
-    name.className = "bg-green-100 font-mono flex-1";
-    name.innerHTML = `<b>Name</b> : ${product.name} ${product.size}"`;
-    divDesc.appendChild(name);
+	let name = document.createElement("div");
+	name.className = "bg-green-100 flex-1";
+	name.innerHTML = `<b>Product</b>: ${product.name} ${product.size}"`;
+	divDetails.appendChild(name);
 
-    let price = document.createElement("div");
-    price.className = "";
-    price.innerHTML = `<b>Price</b> : ${product.price}`;
-    divDesc.appendChild(price);
+	let price = document.createElement("div");
+	price.className = "";
+	price.innerHTML = `<b>Price</b>: ${new Intl.NumberFormat("th-TH", {
+		style: "currency",
+		currency: "THB",
+	}).format(product.price)}`;
+	divDetails.appendChild(price);
 
-    let res = document.createElement("div");
-    res.className = "";
-    res.innerHTML = `<b>Resolution</b> : ${product.resolution}`;
-    divDesc.appendChild(res);
+	let res = document.createElement("div");
+	res.className = "";
+	res.innerHTML = `<b>Resolution</b>: ${product.resolution}`;
+	divDetails.appendChild(res);
 
-    let stock = document.createElement("div");
-    stock.className = ""
-    stock.innerHTML = `<b>In stock</b> : ${product.stock}`;
-    divDesc.appendChild(stock);
+	let stock = document.createElement("div");
+	stock.className = "";
+	if (product.stock == 0) {
+		let outOfStock = document.createElement("b");
+		outOfStock.className = "text-red-500";
+		outOfStock.textContent = "Out of Stock";
+		stock.appendChild(outOfStock);
+	} else {
+		stock.innerHTML = `<b>In stock</b>: ${product.stock}`;
+	}
+	divDetails.appendChild(stock);
 
-    divItem.appendChild(divDesc);
+	divItem.appendChild(divDetails);
 }
