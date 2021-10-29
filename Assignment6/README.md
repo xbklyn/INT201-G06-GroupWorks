@@ -1,8 +1,7 @@
 ## Work ratio
 
-1. A: 10%
-    - asd
-    - asd
+1. 042 Songglod Petchamras: 99.9%
+    - handsome
 2. B: 10%
     - asd
     - asd
