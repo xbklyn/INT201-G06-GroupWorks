@@ -43,31 +43,28 @@ for (const product of products) {
 
 	let name = document.createElement("div");
 	name.className = "bg-green-100 flex-1";
-	name.innerHTML = `<b>Product</b>: ${product.name} ${product.size}"`;
+	name.innerHTML = `<b>Product: </b>${product.name} ${product.size}"`;
 	divDetails.appendChild(name);
 
 	let price = document.createElement("div");
-	price.className = "";
-	price.innerHTML = `<b>Price</b>: ${new Intl.NumberFormat("th-TH", {
+	price.innerHTML = `<b>Price: </b>${new Intl.NumberFormat("th-TH", {
 		style: "currency",
 		currency: "THB",
 	}).format(product.price)}`;
 	divDetails.appendChild(price);
 
 	let res = document.createElement("div");
-	res.className = "";
-	res.innerHTML = `<b>Resolution</b>: ${product.resolution}`;
+	res.innerHTML = `<b>Resolution: </b>${product.resolution}`;
 	divDetails.appendChild(res);
 
 	let stock = document.createElement("div");
-	stock.className = "";
 	if (product.stock == 0) {
 		let outOfStock = document.createElement("b");
 		outOfStock.className = "text-red-500";
 		outOfStock.textContent = "Out of Stock";
 		stock.appendChild(outOfStock);
 	} else {
-		stock.innerHTML = `<b>In stock</b>: ${product.stock}`;
+		stock.innerHTML = `<b>In stock: </b>${product.stock}`;
 	}
 	divDetails.appendChild(stock);
 
