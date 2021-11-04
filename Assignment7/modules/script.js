@@ -18,6 +18,10 @@ body.appendChild(title);
 
 let divContainer = document.createElement("div");
 divContainer.className = "product-container grid grid-cols-5";
+divContainer.id = "store-product"
+
+let divContainer = document.createElement("div");
+divContainer.className = "product-container grid grid-cols-5";
 
 // add container to body
 let container = body.appendChild(divContainer);
@@ -71,6 +75,12 @@ for (const product of products) {
 		stock.innerHTML = `<b>In stock: </b>${product.stock}`;
 	}
 	divDetails.appendChild(stock);
+	
+	divItem.appendChild(divDetails);
+	
+	document.querySelector(".icon").addEventListener("click", function () {
+	document.querySelector("input").classList.toggle("active");
+	})
 
 	//"Add" button 
 	let divBtn = document.createElement("div");
@@ -80,6 +90,18 @@ for (const product of products) {
 	btn.innerHTML = `<b><i>Add</i></b>`;
 	divBtn.appendChild(btn);
 	divDetails.appendChild(divBtn);
+	
+	function filterProducts(e) {
+	const text = e.target.value.toLowerCase();
+	for (let i = 0; i < productStore.length; i++) {
+		let productName = productStore[i].getAttribute("name");
+		if (productName.toLowerCase().indexOf(text) > -1) {
+			productStore[i].style.display = "";
+		} else {
+			productStore[i].style.display = "none";
+		}
+	}
+}
 	
 
 	divItem.appendChild(divDetails);
