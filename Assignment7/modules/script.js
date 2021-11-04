@@ -74,6 +74,15 @@ for (const product of products) {
 	divDetails.appendChild(stock);
 
 	divItem.appendChild(divDetails);
+	
+		//"Add" button 
+	let divBtn = document.createElement("div");
+	divBtn.className = "m-1 p-1";
+	let btn = document.createElement("button");
+	btn.className = `w-full p-2 rounded ${product.stock == 0 ? "bg-gray-100 text-gray-300 pointer-events-none" : "bg-purple-400 text-white transition duration-150 ease-in-out"}`;
+	btn.innerHTML = `<b><i>Add</i></b>`;
+	divBtn.appendChild(btn);
+	divDetails.appendChild(divBtn);
 }
 
 document.querySelector(".icon").addEventListener("click", function () {
