@@ -78,9 +78,6 @@ for (const product of products) {
 	
 	divItem.appendChild(divDetails);
 	
-	document.querySelector(".icon").addEventListener("click", function () {
-	document.querySelector("input").classList.toggle("active");
-	})
 
 	//"Add" button 
 	let divBtn = document.createElement("div");
@@ -91,7 +88,19 @@ for (const product of products) {
 	divBtn.appendChild(btn);
 	divDetails.appendChild(divBtn);
 	
-	function filterProducts(e) {
+
+//toggle search icon
+document.querySelector(".icon").addEventListener("click", function () {
+	document.querySelector("input").classList.toggle("active");
+})
+
+//search function
+const productStore = document.querySelectorAll(".product");
+const search = document.getElementById("search");
+
+search.addEventListener("keyup", filterProducts);
+
+function filterProducts(e) {
 	const text = e.target.value.toLowerCase();
 	for (let i = 0; i < productStore.length; i++) {
 		let productName = productStore[i].getAttribute("name");
@@ -101,9 +110,5 @@ for (const product of products) {
 			productStore[i].style.display = "none";
 		}
 	}
-}
-	
-
-	divItem.appendChild(divDetails);
 }
 
