@@ -28,7 +28,7 @@ for (const product of products) {
 	let divList = document.createElement("div");
 	divList.id = product.code;
 	divList.className = "flex flex-col m-5 bg-white rounded-lg transition duration-200 ease-in-out hover:bg-purple-200 shodow-xl transform hover:scale-110 ";
-	divList.setAttribute("name", product.name);
+	divList.setAttribute("name", product.name + " " + product.size + '"');
 	let divItem = container.appendChild(divList);
 
 	// add img to div in container
@@ -97,10 +97,10 @@ search.addEventListener("keyup", filterProducts);
 
 
 function filterProducts(e) {
-	const text = e.target.value.toLowerCase();
+	const text = e.target.value.toLowerCase().trim();
 	for (let i = 0; i < productStore.length; i++) {
 		let productName = productStore[i].getAttribute("name");
-		if (productName.toLowerCase().indexOf(text) > -1) {
+		if (productName.toLowerCase().trim().includes(text)) {
 			productStore[i].style.display = "";
 		} else {
 			productStore[i].style.display = "none";
