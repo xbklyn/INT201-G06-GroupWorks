@@ -6,9 +6,15 @@
 
 import products from "./products.js";
 
+
+let cart  = {
+	item: [],
+	itemId: [],
+	qtty: 0
+}
 // code here
 let body = document.querySelector("body");
-body.className = "product-list p-6 bg-blue-50";
+body.className = "product-list p-6 bg-blue-50 justify-center";
 
 // add h1 to body
 let title = document.createElement("h1");
@@ -88,6 +94,20 @@ for (const product of products) {
 			: "bg-purple-400 text-white transition duration-150 ease-in-out"
 	}`;
 	btn.innerHTML = `<b><i>Add</i></b>`;
+
+	btn.addEventListener("click", () => {
+		if(!cart.itemId.includes(product.code)){
+			cart.itemId.push(product.code);
+			cart.item.push({monitor: product, qtty: 0});
+		}
+		cart.item.forEach((item) => {
+			item.monitor.code == product.code ? item.qtty++ : item.qtty;
+			cart.qtty += item.qtty;
+		})
+		alert(`${product.name} added to cart!`);
+		console.log(cart.item);
+	})
+
 	divBtn.appendChild(btn);
 	divDetails.appendChild(divBtn);
 }
