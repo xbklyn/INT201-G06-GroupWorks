@@ -84,7 +84,7 @@ for (const product of products) {
 	// add all detail in item containers
 	divItem.appendChild(divDetails);
 
-	//"Add" button
+	//add "Add" button
 	let divBtn = document.createElement("div");
 	divBtn.className = "m-1 p-1";
 	let btn = document.createElement("button");
@@ -95,6 +95,7 @@ for (const product of products) {
 	}`;
 	btn.innerHTML = `<b><i>Add</i></b>`;
 
+	//fuction to add cart in button
 	btn.addEventListener("click", () => {
 		if(!cart.itemId.includes(product.code)){
 			cart.itemId.push(product.code);
