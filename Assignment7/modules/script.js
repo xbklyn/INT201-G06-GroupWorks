@@ -62,6 +62,7 @@ for (const product of products) {
 	divDetails.appendChild(res);
 
 	let stock = document.createElement("div");
+	//Check if have in stock 
 	stock.className = "m-1 p-1 ";
 	if (product.stock == 0) {
 		let outOfStock = document.createElement("b");
@@ -72,10 +73,11 @@ for (const product of products) {
 		stock.innerHTML = `<b>In stock: </b>${product.stock}`;
 	}
 	divDetails.appendChild(stock);
-
+	
+	// add all detail in item containers
 	divItem.appendChild(divDetails);
 	
-		//"Add" button 
+	//"Add" button 
 	let divBtn = document.createElement("div");
 	divBtn.className = "m-1 p-1";
 	let btn = document.createElement("button");
