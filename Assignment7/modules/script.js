@@ -1,20 +1,11 @@
 // html management file
-// tan add script
-// nut add description
-// max add css
-// nine add css
 
-import products from "./products.js";
+import products from "./products/products.js";
 
-
-let cart  = {
-	item: [],
-	itemId: [],
-	qtty: 0
-}
 // code here
 let body = document.querySelector("body");
-body.className = "product-list p-6 bg-blue-50 justify-center";
+body.id = "product-list"
+body.className = "p-6 bg-blue-50 justify-center";
 
 // add h1 to body
 let title = document.createElement("h1");
@@ -64,13 +55,13 @@ for (const product of products) {
 	divDetails.appendChild(price);
 
 	let res = document.createElement("div");
-	res.className = "m-1 p-1 ";
+	res.className = "m-1 p-1";
 	res.innerHTML = `<b>Resolution: </b>${product.resolution}`;
 	divDetails.appendChild(res);
 
 	let stock = document.createElement("div");
-	//Check if have in stock 
-	stock.className = "m-1 p-1 ";
+	// check if have in stock
+	stock.className = "m-1 p-1";
 	if (product.stock == 0) {
 		let outOfStock = document.createElement("b");
 		outOfStock.className = "text-red-500";
@@ -80,57 +71,21 @@ for (const product of products) {
 		stock.innerHTML = `<b>In stock: </b>${product.stock}`;
 	}
 	divDetails.appendChild(stock);
-	
-	// add all detail in item containers
+
+	// add all detail in item container
 	divItem.appendChild(divDetails);
 
-	//add "Add" button
+	// add "Add" button
 	let divBtn = document.createElement("div");
 	divBtn.className = "m-1 p-1";
 	let btn = document.createElement("button");
-	btn.className = `w-full p-2 rounded ${
+	btn.className = `add-to-cart w-full p-2 rounded ${
 		product.stock == 0
 			? "bg-gray-100 text-gray-300 pointer-events-none"
 			: "bg-purple-400 text-white transition duration-150 ease-in-out"
 	}`;
-	btn.innerHTML = `<b><i>Add</i></b>`;
-
-	//fuction to add cart in button
-	btn.addEventListener("click", () => {
-		if(!cart.itemId.includes(product.code)){
-			cart.itemId.push(product.code);
-			cart.item.push({monitor: product, qtty: 0});
-		}
-		cart.item.forEach((item) => {
-			item.monitor.code == product.code ? item.qtty++ : item.qtty;
-			cart.qtty += item.qtty;
-		})
-		alert(`${product.name} added to cart!`);
-		console.log(cart.item);
-	})
+	btn.innerHTML = "<b><i>Add</i></b>";
 
 	divBtn.appendChild(btn);
 	divDetails.appendChild(divBtn);
-}
-//toggle search bar
-document.querySelector(".icon").addEventListener("click", function () {
-	document.querySelector("input").classList.toggle("active");
-});
-
-//search function
-const productStore = document.querySelectorAll(".product");
-const search = document.getElementById("search");
-
-search.addEventListener("keyup", filterProducts);
-
-function filterProducts(e) {
-	const text = e.target.value.toLowerCase().trim();
-	for (let i = 0; i < productStore.length; i++) {
-		let productName = productStore[i].getAttribute("name");
-		if (productName.toLowerCase().trim().includes(text)) {
-			productStore[i].style.display = "";
-		} else {
-			productStore[i].style.display = "none";
-		}
-	}
 }
