@@ -13,12 +13,12 @@ body.className = "product-list p-6 bg-blue-50";
 // add h1 to body
 let title = document.createElement("h1");
 title.className = "font-bold text-xl text-center";
-title.textContent = "Product List";
+title.textContent = "Monitor List";
 body.appendChild(title);
 
 let divContainer = document.createElement("div");
 divContainer.className = "product-container grid grid-cols-5";
-divContainer.id = "store-product"
+divContainer.id = "store-product";
 
 // add container to body
 let container = body.appendChild(divContainer);
@@ -27,7 +27,8 @@ for (const product of products) {
 	// add div to container in body
 	let divList = document.createElement("div");
 	divList.id = product.code;
-	divList.className = "flex flex-col m-5 bg-white rounded-lg transition duration-200 ease-in-out hover:bg-purple-200 shodow-xl transform hover:scale-110 ";
+	divList.className =
+		"flex flex-col m-5 bg-white rounded-lg transition duration-200 ease-in-out hover:bg-purple-200 shadow-xl transform hover:scale-110 product";
 	divList.setAttribute("name", product.name + " " + product.size + '"');
 	let divItem = container.appendChild(divList);
 
@@ -36,7 +37,7 @@ for (const product of products) {
 	img.src = product.imgURL;
 	img.alt = product.name;
 	img.style = "width: 100%; height: 100%; ";
-	img.className = "p-2"
+	img.className = "p-2";
 	divItem.appendChild(img);
 
 	// add details to div in container
@@ -49,7 +50,7 @@ for (const product of products) {
 	divDetails.appendChild(name);
 
 	let price = document.createElement("div");
-	price.className = "m-1 p-1"
+	price.className = "m-1 p-1";
 	price.innerHTML = `<b>Price: </b>${new Intl.NumberFormat("th-TH", {
 		style: "currency",
 		currency: "THB",
@@ -76,12 +77,16 @@ for (const product of products) {
 	
 	// add all detail in item containers
 	divItem.appendChild(divDetails);
-	
-	//"Add" button 
+
+	//"Add" button
 	let divBtn = document.createElement("div");
 	divBtn.className = "m-1 p-1";
 	let btn = document.createElement("button");
-	btn.className = `w-full p-2 rounded ${product.stock == 0 ? "bg-gray-100 text-gray-300 pointer-events-none" : "bg-purple-400 text-white transition duration-150 ease-in-out"}`;
+	btn.className = `w-full p-2 rounded ${
+		product.stock == 0
+			? "bg-gray-100 text-gray-300 pointer-events-none"
+			: "bg-purple-400 text-white transition duration-150 ease-in-out"
+	}`;
 	btn.innerHTML = `<b><i>Add</i></b>`;
 	divBtn.appendChild(btn);
 	divDetails.appendChild(divBtn);
@@ -89,14 +94,13 @@ for (const product of products) {
 
 document.querySelector(".icon").addEventListener("click", function () {
 	document.querySelector("input").classList.toggle("active");
-})
+});
 
 //search function
 const productStore = document.querySelectorAll(".product");
 const search = document.getElementById("search");
 
 search.addEventListener("keyup", filterProducts);
-
 
 function filterProducts(e) {
 	const text = e.target.value.toLowerCase().trim();
