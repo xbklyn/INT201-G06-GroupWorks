@@ -6,4 +6,4 @@
 | 2 | 63130500026   | Chotiwit Souyan          |  |    20%     |
 | 3 | 63130500032   | Nutchanon Assawachin     | Search bar |    20%     |
 | 4 | 63130500034   | Nuttida Meeboon          |  |    20%     |
-| 5 | 63130500042   | Songglod Petchamras      |  |    20%     |
+| 5 | 63130500042   | Songglod Petchamras      | Review & Revise code  |    20%     |
