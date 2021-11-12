@@ -1,11 +1,5 @@
 import products from "./products/products.js";
-
-const cart = {
-	itemID: [],
-	items: [],
-	netPrice: 0,
-	totalQuantity: 0,
-};
+import cart from "./cart.js";
 
 // toggle search bar
 document.querySelector(".icon").addEventListener("click", function () {
