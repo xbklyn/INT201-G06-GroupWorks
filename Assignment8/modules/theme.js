@@ -18,11 +18,15 @@ themeSwitcher.addEventListener("click", clickHandler);
 window.onload = checkTheme();
 
 function checkTheme() {
-	const localStorageTheme = localStorage.getItem("theme");
+    	const localStorageTheme = localStorage.getItem("theme");
 
     if (localStorageTheme !== null && localStorageTheme === "dark") {
-        document.body.className = localStorageTheme;
+        document.body.classList.add(localStorageTheme);
         const themeSwitch = document.getElementById("theme-switch");
         themeSwitch.checked = true;
+    } else {
+        document.body.classList.add(localStorageTheme);
+        const themeSwitch = document.getElementById("theme-switch");
+        themeSwitch.checked = false;
     }
 }
