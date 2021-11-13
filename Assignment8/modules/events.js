@@ -3,7 +3,7 @@ import cart from "./cart.js";
 
 // toggle search bar
 document.querySelector(".icon").addEventListener("click", function () {
-	document.querySelector("input").classList.toggle("active");
+	document.querySelector("#search").classList.toggle("active");
 });
 
 // search function
