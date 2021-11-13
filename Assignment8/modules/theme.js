@@ -15,7 +15,7 @@ function clickHandler() {
 }
 themeSwitcher.addEventListener("click", clickHandler);
 
-window.onload = checkTheme();
+window.onload = checkTheme(), checkCookie();
 
 function checkTheme() {
     	const localStorageTheme = localStorage.getItem("theme");
