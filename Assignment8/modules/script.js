@@ -5,7 +5,7 @@ import products from "./products/products.js";
 // code here
 let body = document.querySelector("body");
 body.id = "product-list"
-body.className = "p-6 bg-blue-50 justify-center";
+body.className = "p-6 justify-center";
 
 // add h1 to body
 let title = document.createElement("h1");
