@@ -1,4 +1,3 @@
-import products from "./products/products.js";
 import cart from "./cart.js";
 
 // toggle search bar
@@ -27,29 +26,7 @@ const addButton = document.querySelectorAll(".add-to-cart");
 
 for (const [id, btn] of addButton.entries()) {
 	btn.addEventListener("click", () => {
-		if (cart.itemID.includes(id + 1)) {
-			cart.items.forEach((item) => {
-				if (item.productDetails.productCode == id + 1) {
-					item.quantity += 1;
-					item.totalPrice = item.price * item.quantity;
-				}
-			});
-			cart.totalQuantity += 1;
-		} else {
-			cart.itemID.push(id + 1);
-			cart.items.push({
-				productDetails: {
-					productCode: products[id].code,
-					productName: products[id].name,
-					resolution: products[id].resolution,
-					sizeInInches: products[id].size,
-				},
-				price: products[id].price,
-				quantity: 1,
-				totalPrice: products[id].price,
-			});
-			cart.totalQuantity += 1;
-		}
+		cart.add(id);
 		if (cart.totalQuantity <= 99) {
 			document.getElementById(
 				"total"
@@ -69,7 +46,7 @@ shoppingCart.addEventListener("click", () => {
 		(total, item) => total + item.totalPrice,
 		netPrice
 	);
-	console.log(cart);
+	console.log(JSON.stringify(cart, 0, 2));
 	alert(
 		`Total Quantity: ${
 			cart.totalQuantity
