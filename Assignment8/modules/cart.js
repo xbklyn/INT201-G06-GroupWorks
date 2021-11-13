@@ -12,12 +12,11 @@ const cart = {
 	 */
 	add: function (id) {
 		if (this.itemID.includes(id + 1)) {
-			this.items.forEach((item) => {
-				if (item.productDetails.productCode == id + 1) {
-					item.quantity += 1;
-					item.totalPrice = item.price * item.quantity;
-				}
-			});
+			const index = this.itemID.indexOf(id + 1);
+			this.items[index].quantity += 1;
+			let price = this.items[index].price;
+			let quantity = this.items[index].quantity;
+			this.items[index].totalPrice = price * quantity;
 			this.totalQuantity += 1;
 		} else {
 			this.itemID.push(id + 1);

@@ -20,7 +20,7 @@ window.onload = checkTheme(), checkCookie();
 function checkTheme() {
 	const localStorageTheme = localStorage.getItem("theme");
 
-	if (localStorageTheme !== null && localStorageTheme === "dark") {
+	if (localStorageTheme === "dark") {
 		document.body.classList.add(localStorageTheme);
 		const themeSwitch = document.getElementById("theme-switch");
 		themeSwitch.checked = true;
