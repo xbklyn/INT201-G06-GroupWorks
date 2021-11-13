@@ -1,3 +1,4 @@
+//add local storage theme
 const themeSwitcher = document.getElementById("theme-switch");
 
 themeSwitcher.checked = false;
@@ -19,9 +20,9 @@ window.onload = checkTheme();
 function checkTheme() {
 	const localStorageTheme = localStorage.getItem("theme");
 
-	if (localStorageTheme !== null && localStorageTheme === "dark") {
-		document.body.className = localStorageTheme;
-		const themeSwitch = document.getElementById("theme-switch");
-		themeSwitch.checked = true;
-	}
+    if (localStorageTheme !== null && localStorageTheme === "dark") {
+        document.body.className = localStorageTheme;
+        const themeSwitch = document.getElementById("theme-switch");
+        themeSwitch.checked = true;
+    }
 }
