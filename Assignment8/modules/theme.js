@@ -1,3 +1,4 @@
+//add local storage theme
 const themeSwitcher = document.getElementById("theme-switch");
 
 themeSwitcher.checked = false;
