@@ -36,23 +36,3 @@ for (const [id, btn] of addButton.entries()) {
 		}
 	});
 }
-
-// show net price function
-const shoppingCart = document.querySelector("#shopping-cart");
-
-shoppingCart.addEventListener("click", () => {
-	let netPrice = 0;
-	cart.netPrice = cart.items.reduce(
-		(total, item) => total + item.totalPrice,
-		netPrice
-	);
-	console.log(JSON.stringify(cart, 0, 2));
-	alert(
-		`Total Quantity: ${
-			cart.totalQuantity
-		}\nNet price: ${new Intl.NumberFormat("th-TH", {
-			style: "currency",
-			currency: "THB",
-		}).format(cart.netPrice)}`
-	);
-});

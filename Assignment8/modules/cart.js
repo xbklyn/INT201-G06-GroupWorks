@@ -22,6 +22,7 @@ const cart = {
 			this.itemID.push(id + 1);
 			this.items.push({
 				productDetails: {
+					img: products[id].imgURL,
 					productCode: products[id].code,
 					productName: products[id].name,
 					resolution: products[id].resolution,
@@ -35,8 +36,8 @@ const cart = {
 		}
 	},
 	// new features
-	// remove: (id) => {},
-	// clear: () => {},
+	// remove: function (id) {},
+	// clear: function () {},
 };
 
 export { cart as default };

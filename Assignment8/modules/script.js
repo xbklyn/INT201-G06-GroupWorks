@@ -4,7 +4,7 @@ import products from "./products/products.js";
 
 // code here
 let body = document.querySelector("body");
-body.id = "product-list"
+body.id = "product-list";
 body.className = "p-6 justify-center";
 
 // add h1 to body

@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./modules/style.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/modal-box.css">
     <title>Product list</title>
 </head>
 
@@ -32,9 +33,19 @@
             <span id="total" style="transform: rotate(0);"><b>0</b></span>
         </div>
     </div>
+    <div id="modal-box" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <b>Shopping cart</b>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
     <script src="./modules/script.js" type="module"></script>
     <script src="./modules/events.js" type="module"></script>
     <script src="./modules/theme.js" type="module"></script>
+    <script src="./modules/modal_box.js" type="module"></script>
     <script src="./modules/cookie.js"></script>
 </body>
 
