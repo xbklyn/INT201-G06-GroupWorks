@@ -121,7 +121,8 @@ window.onclick = function(event) {
 // Clear all products in cart
 const clearAll = document.createElement('button');
 modalBody.appendChild(clearAll);
-clearAll.innerHTML = 'Clear All';
+clearAll.className = 'm-2 p-2 bg-red-500 text-white rounded-lg';
+clearAll.innerHTML = '<b>Clear All</b>';
 
 clearAll.addEventListener('click', () => {
     CookieUtil.unset('shopping_cart');
