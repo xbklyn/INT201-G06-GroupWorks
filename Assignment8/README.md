@@ -4,6 +4,6 @@
 |:-:| :-----------: | ------------------------ | --------------- | :--------: |
 | 1 | 63130500006   | Kittiphum Uamthon        |  |    69%     |
 | 2 | 63130500026   | Chotiwit Souyan          | |    20%     |
-| 3 | 63130500032   | Nutchanon Assawachin     | add theme and adapt local storage for theme |    20%     |
+| 3 | 63130500032   | Nutchanon Assawachin     | add theme and adapt local storage for theme |    30%     |
 | 4 | 63130500034   | Nuttida Meeboon          | |    20%     |
-| 5 | 63130500042   | Songglod Petchamras      | revise & restructure code, add modal box, and adapt cookies for shopping cart |    69%     |
+| 5 | 63130500042   | Songglod Petchamras      | revise & restructure code, add modal box, and adapt cookies for shopping cart |    30%     |
