@@ -3,7 +3,7 @@ import CookieUtil from "./cookieUtil.js";
 
 window.onload = checkTheme();
 
-if (CookieUtil.getCookie("shopping_cart") !== "") {
+if (CookieUtil.getCookie("shopping_cart") != null) {
 	let sc = JSON.parse(CookieUtil.getCookie("shopping_cart"));
 	if (sc.totalQuantity <= 99) {
 		document.getElementById(

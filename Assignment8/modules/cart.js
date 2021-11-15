@@ -18,7 +18,7 @@ const cart = {
  * @param {number} id id of the button
  */
 function add(id) {
-	if (CookieUtil.getCookie("shopping_cart") === "") {
+	if (CookieUtil.getCookie("shopping_cart") == null) {
 		CookieUtil.setCookie("shopping_cart", JSON.stringify(cart, 0, 2), 1);
 	} else {
 		let sc = JSON.parse(CookieUtil.getCookie("shopping_cart"));
