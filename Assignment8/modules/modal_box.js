@@ -51,51 +51,60 @@ shoppingCart.addEventListener("click", () => {
 		let row = document.createElement("tr");
 		tbody.appendChild(row);
 
-		let no = document.createElement("td");
-		no.textContent = i + 1;
-		no.style = "text-align: center;";
-		row.appendChild(no);
+		let noCol = document.createElement("td");
+		noCol.className = "no-col";
+		noCol.textContent = i + 1;
+		noCol.style = "text-align: center;";
+		row.appendChild(noCol);
 
-		let image = document.createElement("td");
+		let imageCol = document.createElement("td");
 		let productImg = document.createElement("img");
+		imageCol.className = "image-col";
 		productImg.src = cart.items[i].productDetails.img;
-		image.appendChild(productImg);
-		row.appendChild(image);
+		productImg.alt = cart.items[i].productDetails.productName;
+		imageCol.appendChild(productImg);
+		row.appendChild(imageCol);
 
-		let productCode = document.createElement("td");
-		productCode.textContent = cart.items[i].productDetails.productCode;
-		productCode.style = "text-align: center;";
-		row.appendChild(productCode);
+		let productCodeCol = document.createElement("td");
+		productCodeCol.className = "product-code-col";
+		productCodeCol.textContent = cart.items[i].productDetails.productCode;
+		productCodeCol.style = "text-align: center;";
+		row.appendChild(productCodeCol);
 
-		let productName = document.createElement("td");
-		productName.textContent = cart.items[i].productDetails.productName;
-		row.appendChild(productName);
+		let productNameCol = document.createElement("td");
+		productNameCol.className = "product-name-col";
+		productNameCol.textContent = cart.items[i].productDetails.productName;
+		row.appendChild(productNameCol);
 
-		let productPrice = document.createElement("td");
-		productPrice.textContent = new Intl.NumberFormat("th-TH", {
+		let productPriceCol = document.createElement("td");
+		productPriceCol.className = "product-price-col";
+		productPriceCol.textContent = new Intl.NumberFormat("th-TH", {
 			style: "currency",
 			currency: "THB",
 		}).format(cart.items[i].price);
-		productPrice.style = "text-align: center;";
-		row.appendChild(productPrice);
+		productPriceCol.style = "text-align: center;";
+		row.appendChild(productPriceCol);
 
-		let productQuantity = document.createElement("td");
-		productQuantity.textContent = cart.items[i].quantity;
-		productQuantity.style = "text-align: center;";
-		row.appendChild(productQuantity);
+		let productQuantityCol = document.createElement("td");
+		productQuantityCol.className = "product-quantity-col";
+		productQuantityCol.textContent = cart.items[i].quantity;
+		productQuantityCol.style = "text-align: center;";
+		row.appendChild(productQuantityCol);
 
-		let totalPrice = document.createElement("td");
-		totalPrice.textContent = new Intl.NumberFormat("th-TH", {
+		let totalPriceCol = document.createElement("td");
+		totalPriceCol.className = "total-price-col";
+		totalPriceCol.textContent = new Intl.NumberFormat("th-TH", {
 			style: "currency",
 			currency: "THB",
 		}).format(cart.items[i].totalPrice);
-		totalPrice.style = "text-align: center;";
-		row.appendChild(totalPrice);
+		totalPriceCol.style = "text-align: center;";
+		row.appendChild(totalPriceCol);
 
-		let deleteButton = document.createElement("td");
-		deleteButton.innerHTML = "&#x1F5D1;";
-		deleteButton.style = "text-align: center;";
-		row.appendChild(deleteButton);
+		let deleteCol = document.createElement("td");
+		deleteCol.className = "deleteButton";
+		deleteCol.innerHTML = "&#x1F5D1;";
+		deleteCol.style = "text-align: center;";
+		row.appendChild(deleteCol);
 	}
 	modal.style.display = "block";
 });
