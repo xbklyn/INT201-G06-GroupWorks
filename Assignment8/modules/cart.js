@@ -1,6 +1,7 @@
 // need to revise this file
 
 import products from "./products/products.js";
+import CookieUtil from "./cookieUtil.js";
 
 const cart = {
 	itemID: [],
@@ -39,5 +40,11 @@ const cart = {
 	// remove: function (id) {},
 	// clear: function () {},
 };
+
+function addCookie(){
+	cart.itemID.forEach(cart => {
+		CookieUtil.setCookie(cart.itemID,cart.items,time() + (10 * 365 * 24 * 60 * 60));
+	});
+}
 
 export { cart as default };
