@@ -1,4 +1,4 @@
-import cart from "./cart.js";
+import CookieUtil from "./cookieUtil.js";
 
 let modalBody = document.querySelector("div.modal-body");
 let table = document.createElement("table");
@@ -31,18 +31,13 @@ for (const head of heads) {
 	tr.appendChild(th);
 }
 
-// show net price function
+// show shopping cart function
 const shoppingCart = document.querySelector("#shopping-cart");
 let modal = document.getElementById("modal-box");
 
 shoppingCart.addEventListener("click", () => {
-	let netPrice = 0;
-	cart.netPrice = cart.items.reduce(
-		(total, item) => total + item.totalPrice,
-		netPrice
-	);
-	console.log(JSON.stringify(cart, 0, 2));
-
+	let cart = JSON.parse(CookieUtil.getCookie("shopping_cart"));
+	// console.log(JSON.stringify(cart, 0, 2));
 	let tableBody = document.getElementById("tbody");
 	while (tableBody.firstChild) {
 		tableBody.removeChild(tableBody.lastChild);

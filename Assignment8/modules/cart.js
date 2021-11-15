@@ -35,16 +35,12 @@ const cart = {
 			});
 			this.totalQuantity += 1;
 		}
+		this.netPrice += products[id].price;
+		CookieUtil.setCookie("shopping_cart", JSON.stringify(cart, 0, 2), 1);
 	},
 	// new features
 	// remove: function (id) {},
 	// clear: function () {},
 };
-
-function addCookie(){
-	cart.itemID.forEach(cart => {
-		CookieUtil.setCookie(cart.itemID,cart.items,time() + (10 * 365 * 24 * 60 * 60));
-	});
-}
 
 export { cart as default };
