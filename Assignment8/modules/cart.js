@@ -19,6 +19,21 @@ const cart = {
  */
 function add(id) {
 	if (CookieUtil.getCookie("shopping_cart") == null) {
+		cart.itemID.push(id + 1);
+		cart.items.push({
+			productDetails: {
+				img: products[id].imgURL,
+				productCode: products[id].code,
+				productName: products[id].name,
+				resolution: products[id].resolution,
+				sizeInInches: products[id].size,
+			},
+			price: products[id].price,
+			quantity: 1,
+			totalPrice: products[id].price,
+		});
+		cart.totalQuantity += 1;
+		cart.netPrice += products[id].price;
 		CookieUtil.setCookie("shopping_cart", JSON.stringify(cart, 0, 2), 1);
 	} else {
 		let sc = JSON.parse(CookieUtil.getCookie("shopping_cart"));
