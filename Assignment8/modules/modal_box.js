@@ -1,4 +1,3 @@
-import products from "./products/products.js";
 import cart from "./cart.js";
 
 let modalBody = document.querySelector("div.modal-body");
@@ -56,6 +55,47 @@ shoppingCart.addEventListener("click", () => {
 		no.textContent = i + 1;
 		no.style = "text-align: center;";
 		row.appendChild(no);
+
+		let image = document.createElement("td");
+		let productImg = document.createElement("img");
+		productImg.src = cart.items[i].productDetails.img;
+		image.appendChild(productImg);
+		row.appendChild(image);
+
+		let productCode = document.createElement("td");
+		productCode.textContent = cart.items[i].productDetails.productCode;
+		productCode.style = "text-align: center;";
+		row.appendChild(productCode);
+
+		let productName = document.createElement("td");
+		productName.textContent = cart.items[i].productDetails.productName;
+		row.appendChild(productName);
+
+		let productPrice = document.createElement("td");
+		productPrice.textContent = new Intl.NumberFormat("th-TH", {
+			style: "currency",
+			currency: "THB",
+		}).format(cart.items[i].price);
+		productPrice.style = "text-align: center;";
+		row.appendChild(productPrice);
+
+		let productQuantity = document.createElement("td");
+		productQuantity.textContent = cart.items[i].quantity;
+		productQuantity.style = "text-align: center;";
+		row.appendChild(productQuantity);
+
+		let totalPrice = document.createElement("td");
+		totalPrice.textContent = new Intl.NumberFormat("th-TH", {
+			style: "currency",
+			currency: "THB",
+		}).format(cart.items[i].totalPrice);
+		totalPrice.style = "text-align: center;";
+		row.appendChild(totalPrice);
+
+		let deleteButton = document.createElement("td");
+		deleteButton.innerHTML = "&#x1F5D1;";
+		deleteButton.style = "text-align: center;";
+		row.appendChild(deleteButton);
 	}
 	modal.style.display = "block";
 });
