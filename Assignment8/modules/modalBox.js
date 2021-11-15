@@ -36,13 +36,13 @@ const shoppingCart = document.querySelector("#shopping-cart");
 let modal = document.getElementById("modal-box");
 
 shoppingCart.addEventListener("click", () => {
-	let cart = JSON.parse(CookieUtil.getCookie("shopping_cart"));
+	let sc = JSON.parse(CookieUtil.getCookie("shopping_cart"));
 	// console.log(JSON.stringify(cart, 0, 2));
 	let tableBody = document.getElementById("tbody");
 	while (tableBody.firstChild) {
 		tableBody.removeChild(tableBody.lastChild);
 	}
-	for (let i = 0; i < cart.items.length; i++) {
+	for (let i = 0; i < sc.items.length; i++) {
 		let row = document.createElement("tr");
 		tbody.appendChild(row);
 
@@ -55,20 +55,20 @@ shoppingCart.addEventListener("click", () => {
 		let imageCol = document.createElement("td");
 		let productImg = document.createElement("img");
 		imageCol.className = "image-col";
-		productImg.src = cart.items[i].productDetails.img;
-		productImg.alt = cart.items[i].productDetails.productName;
+		productImg.src = sc.items[i].productDetails.img;
+		productImg.alt = sc.items[i].productDetails.productName;
 		imageCol.appendChild(productImg);
 		row.appendChild(imageCol);
 
 		let productCodeCol = document.createElement("td");
 		productCodeCol.className = "product-code-col";
-		productCodeCol.textContent = cart.items[i].productDetails.productCode;
+		productCodeCol.textContent = sc.items[i].productDetails.productCode;
 		productCodeCol.style = "text-align: center;";
 		row.appendChild(productCodeCol);
 
 		let productNameCol = document.createElement("td");
 		productNameCol.className = "product-name-col";
-		productNameCol.textContent = cart.items[i].productDetails.productName;
+		productNameCol.textContent = sc.items[i].productDetails.productName;
 		row.appendChild(productNameCol);
 
 		let productPriceCol = document.createElement("td");
@@ -76,13 +76,13 @@ shoppingCart.addEventListener("click", () => {
 		productPriceCol.textContent = new Intl.NumberFormat("th-TH", {
 			style: "currency",
 			currency: "THB",
-		}).format(cart.items[i].price);
+		}).format(sc.items[i].price);
 		productPriceCol.style = "text-align: center;";
 		row.appendChild(productPriceCol);
 
 		let productQuantityCol = document.createElement("td");
 		productQuantityCol.className = "product-quantity-col";
-		productQuantityCol.textContent = cart.items[i].quantity;
+		productQuantityCol.textContent = sc.items[i].quantity;
 		productQuantityCol.style = "text-align: center;";
 		row.appendChild(productQuantityCol);
 
@@ -91,7 +91,7 @@ shoppingCart.addEventListener("click", () => {
 		totalPriceCol.textContent = new Intl.NumberFormat("th-TH", {
 			style: "currency",
 			currency: "THB",
-		}).format(cart.items[i].totalPrice);
+		}).format(sc.items[i].totalPrice);
 		totalPriceCol.style = "text-align: center;";
 		row.appendChild(totalPriceCol);
 

@@ -1,4 +1,4 @@
-import cart from "./cart.js";
+import { add } from "./cart.js";
 import CookieUtil from "./cookieUtil.js";
 
 // toggle search bar
@@ -27,7 +27,7 @@ const addButton = document.querySelectorAll(".add-to-cart");
 
 for (const [id, btn] of addButton.entries()) {
 	btn.addEventListener("click", () => {
-		cart.add(id);
+		add(id);
 		let sc = JSON.parse(CookieUtil.getCookie("shopping_cart"));
 		if (sc.totalQuantity <= 99) {
 			document.getElementById(
