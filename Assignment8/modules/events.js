@@ -1,4 +1,5 @@
 import cart from "./cart.js";
+import CookieUtil from "./cookieUtil.js";
 
 // toggle search bar
 document.querySelector(".icon").addEventListener("click", function () {
@@ -27,10 +28,11 @@ const addButton = document.querySelectorAll(".add-to-cart");
 for (const [id, btn] of addButton.entries()) {
 	btn.addEventListener("click", () => {
 		cart.add(id);
-		if (cart.totalQuantity <= 99) {
+		let sc = JSON.parse(CookieUtil.getCookie("shopping_cart"));
+		if (sc.totalQuantity <= 99) {
 			document.getElementById(
 				"total"
-			).innerHTML = `<b>${cart.totalQuantity}</b>`;
+			).innerHTML = `<b>${sc.totalQuantity}</b>`;
 		} else {
 			document.getElementById("total").innerHTML = `<b>99+</b>`;
 		}
