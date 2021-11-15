@@ -1,4 +1,5 @@
 import CookieUtil from "./cookieUtil.js";
+import { remove, updateTotalQty } from "./cart.js";
 
 let modalBody = document.querySelector("div.modal-body");
 let table = document.createElement("table");
@@ -31,6 +32,11 @@ for (const head of heads) {
 	tr.appendChild(th);
 }
 
+function deleteRow(id) {
+	let rw = document.querySelector(`#sc-row-${id + 1}`);
+	rw.remove();
+}
+
 // show shopping cart function
 const shoppingCart = document.querySelector("#shopping-cart");
 let modal = document.getElementById("modal-box");
@@ -39,12 +45,13 @@ shoppingCart.addEventListener("click", () => {
 	if (CookieUtil.getCookie("shopping_cart") != null) {
 		let sc = JSON.parse(CookieUtil.getCookie("shopping_cart"));
 		// console.log(JSON.stringify(cart, 0, 2));
-		let tableBody = document.getElementById("tbody");
+		let tableBody = document.querySelector("#tbody");
 		while (tableBody.firstChild) {
 			tableBody.removeChild(tableBody.lastChild);
 		}
 		for (let i = 0; i < sc.items.length; i++) {
 			let row = document.createElement("tr");
+			row.id = `sc-row-${i + 1}`;
 			tbody.appendChild(row);
 
 			let noCol = document.createElement("td");
@@ -97,9 +104,18 @@ shoppingCart.addEventListener("click", () => {
 			row.appendChild(totalPriceCol);
 
 			let deleteCol = document.createElement("td");
-			deleteCol.className = "deleteButton";
-			deleteCol.innerHTML = "&#x1F5D1;";
+			let deleteButton = document.createElement("button");
+			deleteButton.type = "button";
+			deleteButton.innerHTML = "&#x1F5D1;";
+			deleteButton.className = "delete-button";
+			deleteButton.addEventListener("click", () => {
+				remove(i);
+				updateTotalQty();
+				deleteRow(i);
+			});
+
 			deleteCol.style = "text-align: center;";
+			deleteCol.appendChild(deleteButton);
 			row.appendChild(deleteCol);
 		}
 	}

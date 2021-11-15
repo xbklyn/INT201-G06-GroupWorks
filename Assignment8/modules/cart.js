@@ -11,8 +11,30 @@ const cart = {
 };
 
 // new features
-// remove: function (id) {},
 // clear: function () {},
+
+function updateTotalQty() {
+	let sc = JSON.parse(CookieUtil.getCookie("shopping_cart"));
+	if (sc.totalQuantity <= 99) {
+		document.getElementById(
+			"total"
+		).innerHTML = `<b>${sc.totalQuantity}</b>`;
+	} else {
+		document.getElementById("total").innerHTML = `<b>99+</b>`;
+	}
+}
+
+/**
+ * @param {number} id id of the button
+ */
+function remove(id) {
+	let sc = JSON.parse(CookieUtil.getCookie("shopping_cart"));
+	sc.totalQuantity -= sc.items[id].quantity;
+	sc.netPrice -= sc.items[id].totalPrice;
+	sc.itemID.splice(id, 1);
+	sc.items.splice(id, 1);
+	CookieUtil.setCookie("shopping_cart", JSON.stringify(sc, 0, 2), 1);
+}
 
 /**
  * @param {number} id id of the button
@@ -65,4 +87,4 @@ function add(id) {
 	}
 }
 
-export { cart, add };
+export { cart, add, remove, updateTotalQty };
