@@ -10,8 +10,15 @@ const cart = {
 	totalQuantity: 0,
 };
 
-// new features
-// clear: function () {},
+function clearAll() {
+	CookieUtil.unset("shopping_cart");
+	let tableBody = document.getElementById("tbody");
+	while (tableBody.firstChild) {
+		tableBody.removeChild(tableBody.lastChild);
+	}
+	let totalQuantity = document.getElementById("total");
+	totalQuantity.innerHTML = "<b>0</b>";
+}
 
 function updateTotalQty() {
 	let sc = JSON.parse(CookieUtil.getCookie("shopping_cart"));
@@ -87,4 +94,4 @@ function add(id) {
 	}
 }
 
-export { cart, add, remove, updateTotalQty };
+export { cart, add, remove, updateTotalQty, clearAll };

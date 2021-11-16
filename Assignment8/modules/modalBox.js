@@ -1,5 +1,5 @@
 import CookieUtil from "./cookieUtil.js";
-import { remove, updateTotalQty } from "./cart.js";
+import { remove, updateTotalQty, clearAll } from "./cart.js";
 
 let modalBody = document.querySelector("div.modal-body");
 let table = document.createElement("table");
@@ -135,17 +135,9 @@ window.onclick = function (event) {
 };
 
 // Clear all products in cart
-const clearAll = document.createElement("button");
-modalBody.appendChild(clearAll);
-clearAll.className = "m-2 p-2 bg-red-500 text-white rounded-lg";
-clearAll.innerHTML = "<b>Clear All</b>";
-
-clearAll.addEventListener("click", () => {
-	CookieUtil.unset("shopping_cart");
-	let tableBody = document.getElementById("tbody");
-	while (tableBody.firstChild) {
-		tableBody.removeChild(tableBody.lastChild);
-		const clearAll = document.getElementById("total");
-		clearAll.innerHTML = "<b>0</b>";
-	}
-});
+const clearAllButton = document.createElement("button");
+clearAllButton.id = "clear-all-products";
+clearAllButton.className = "m-2 p-2 bg-red-500 text-white rounded-lg";
+clearAllButton.innerHTML = "<b>Clear All</b>";
+clearAllButton.addEventListener("click", clearAll);
+modalBody.appendChild(clearAllButton);

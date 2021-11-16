@@ -56,6 +56,14 @@ td > img {
 	font-weight: bold;
 }
 
+#clear-all-products:hover {
+	background-color: rgb(255, 100, 100);
+}
+
+#clear-all-products:active {
+	background-color: rgb(224, 30, 30);
+}
+
 .close:hover,
 .close:focus {
 	color: rgb(0, 0, 0);
