@@ -1,0 +1,9 @@
+{
+	"type": "module",
+	"dependencies": {
+		"tailwindcss": "^2.2.17"
+	},
+	"scripts": {
+		"tailwind" : "npx tailwindcss -i ./src/style.css -o ./styles/style.css"
+	}
+}

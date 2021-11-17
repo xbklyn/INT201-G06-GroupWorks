@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/modal-box.css">
+    <title>Product list</title>
+</head>
+
+<body>
+    <div class="toggle-switch">
+        <p class="dark-mode">&#x1f319;</p>
+        <span>
+            <label class="switch">
+                <input id="theme-switch" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </span>
+        <p class="light-mode">&#x1f506;</p>
+    </div>
+    <div class="search">
+        <div class="icon">
+            <span>&#9906;</span>
+        </div>
+        <input type="text" placeholder="Search" id="search">
+    </div>
+    <div class="shopping-cart">
+        <div id="shopping-cart" class="icon" style="background-color: darkcyan; font-size: 1em;">
+            <span style="transform: rotate(0);">&#128722;</span>
+            <span id="total" style="transform: rotate(0);"><b>0</b></span>
+        </div>
+    </div>
+    <div id="modal-box" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <b>Shopping cart</b>
+            </div>
+            <div class="modal-body"></div>
+        </div>
+    </div>
+    <script src="./modules/script.js" type="module"></script>
+    <script src="./modules/events.js" type="module"></script>
+    <script src="./modules/theme.js" type="module"></script>
+    <script src="./modules/modalBox.js" type="module"></script>
+    <script src="./modules/loadStorage.js" type="module"></script>
+</body>
+
+</html>
