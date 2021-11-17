@@ -1,7 +1,5 @@
 // store in localStorage
 
-import products from "../../Assignment8/modules/products/products.js";
-
 class Cart {
 	#items;
 	#netPrice = 0;
@@ -28,7 +26,7 @@ class Cart {
 
 	get netPrice() {
 		this.#items.forEach((value) => {
-			this.#netPrice += value.price;
+			this.#netPrice += value.price * value.quantity;
 		});
 		return this.#netPrice;
 	}
@@ -43,7 +41,7 @@ class Cart {
 				this.getItem(id).quantity += 1;
 			} else {
 				this.#items.set(id, product);
-				// set default quantity = 1
+				this.getItem(id).quantity = 1;
 			}
 		} else {
 			if (this.find(id)) {
@@ -77,6 +75,15 @@ class Cart {
 	getItem(id) {
 		return this.find(id) ? this.#items.get(id) : null;
 	}
+
+	/**
+	 * @param {*} id product code
+	 */
+	getTotalPrice(id) {
+		let price = this.getItem(id).price;
+		let quantity = this.getItem(id).quantity;
+		return price * quantity;
+	}
 }
 
 let cart = new Cart();
@@ -84,12 +91,13 @@ let cart = new Cart();
 for (let i = 0; i < 5; i++) {
 	cart.add(i + 1, {
 		name: `Item ${i}`,
-		quantity: (i + 1) * 2,
 		price: 100 * (i + 1),
 	});
 }
 
 cart.add(5);
+console.log(JSON.stringify(Object.fromEntries(cart.allItems), 0, 2));
 console.log(cart.allItems);
 console.log(cart.totalQty);
 console.log(cart.netPrice);
+console.log(cart.getTotalPrice(5));
