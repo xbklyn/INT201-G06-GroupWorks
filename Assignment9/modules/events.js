@@ -1,4 +1,5 @@
-import { add, updateTotalQty } from "./cart.js";
+import * as lib from "./test.js";
+import products from "./products/products.js";
 
 // toggle search bar
 document.querySelector(".icon").addEventListener("click", function () {
@@ -26,7 +27,8 @@ const addButton = document.querySelectorAll(".add-to-cart");
 
 for (const [id, btn] of addButton.entries()) {
 	btn.addEventListener("click", () => {
-		add(id);
-		updateTotalQty();
+		lib.add(products[id].code);
+		let totalQuantity = document.getElementById("total");
+		totalQuantity.innerHTML = `<b>${lib.getTotalQty()}</b>`;
 	});
 }

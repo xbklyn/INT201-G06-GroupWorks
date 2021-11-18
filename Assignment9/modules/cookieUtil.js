@@ -1,11 +1,11 @@
 export default class CookieUtil {
 	static getCookie(name) {
-		console.log(`all cookies: ${document.cookie}`);
+		// console.log(`all cookies: ${document.cookie}`);
 		let cookieName = `${encodeURIComponent(name)}=`;
 		let cookieStart = document.cookie.indexOf(cookieName);
 		let cookieValue = null;
 		console.log(`cookieName = ${cookieName}`);
-		console.log(`cookieStart = ${cookieStart}`);
+		// console.log(`cookieStart = ${cookieStart}`);
 
 		if (cookieStart > -1) {
 			let cookieEnd = document.cookie.indexOf(";", cookieStart);

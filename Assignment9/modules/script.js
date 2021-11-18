@@ -1,27 +1,28 @@
 // html management file
 
 import products from "./products/products.js";
+import * as lib from "./test.js";
 
 // code here
-let body = document.querySelector("body");
-body.id = "product-list";
-body.className = "p-6 justify-center";
+let mainBody = document.querySelector("body");
+mainBody.id = "product-list";
+mainBody.className = "p-6 justify-center";
 
-// add h1 to body
+// add h1 to mainBody
 let title = document.createElement("h1");
 title.className = "font-bold text-xl text-center";
 title.textContent = "Monitor List";
-body.appendChild(title);
+mainBody.appendChild(title);
 
 let divContainer = document.createElement("div");
 divContainer.className = "product-container grid grid-cols-5";
 divContainer.id = "store-product";
 
-// add container to body
-let container = body.appendChild(divContainer);
+// add container to mainBody
+let container = mainBody.appendChild(divContainer);
 
 for (const product of products) {
-	// add div to container in body
+	// add div to container in mainBody
 	let divList = document.createElement("div");
 	divList.id = product.code;
 	divList.className =
@@ -89,3 +90,6 @@ for (const product of products) {
 	divBtn.appendChild(btn);
 	divDetails.appendChild(divBtn);
 }
+
+let totalQuantity = document.getElementById("total");
+totalQuantity.innerHTML = `<b>${lib.getTotalQty()}</b>`;

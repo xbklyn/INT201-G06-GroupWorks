@@ -1,5 +1,6 @@
 import CookieUtil from "./cookieUtil.js";
-import { remove, updateTotalQty, clearAll } from "./cart.js";
+import * as lib from "./test.js";
+import products from "./products/products.js";
 
 let modalBody = document.querySelector("div.modal-body");
 let table = document.createElement("table");
@@ -42,14 +43,14 @@ const shoppingCart = document.querySelector("#shopping-cart");
 let modal = document.getElementById("modal-box");
 
 shoppingCart.addEventListener("click", () => {
-	if (CookieUtil.getCookie("shopping_cart") != null) {
-		let sc = JSON.parse(CookieUtil.getCookie("shopping_cart"));
+	if (CookieUtil.getCookie("cart") !== null) {
+		let sc = lib.parseToObj(CookieUtil.getCookie("cart"));
 		// console.log(JSON.stringify(cart, 0, 2));
 		let tableBody = document.querySelector("#tbody");
 		while (tableBody.firstChild) {
 			tableBody.removeChild(tableBody.lastChild);
 		}
-		for (let i = 0; i < sc.items.length; i++) {
+		for (let i = 0; i < Object.keys(sc).length; i++) {
 			let row = document.createElement("tr");
 			row.id = `sc-row-${i + 1}`;
 			tbody.appendChild(row);
@@ -63,20 +64,23 @@ shoppingCart.addEventListener("click", () => {
 			let imageCol = document.createElement("td");
 			let productImg = document.createElement("img");
 			imageCol.className = "image-col";
-			productImg.src = sc.items[i].productDetails.img;
-			productImg.alt = sc.items[i].productDetails.productName;
+			productImg.src = products.find(
+				(product) => product.code == Object.keys(sc)[i]
+			).imgURL;
 			imageCol.appendChild(productImg);
 			row.appendChild(imageCol);
 
 			let productCodeCol = document.createElement("td");
 			productCodeCol.className = "product-code-col";
-			productCodeCol.textContent = sc.items[i].productDetails.productCode;
+			productCodeCol.textContent = Object.keys(sc)[i];
 			productCodeCol.style = "text-align: center;";
 			row.appendChild(productCodeCol);
 
 			let productNameCol = document.createElement("td");
 			productNameCol.className = "product-name-col";
-			productNameCol.textContent = sc.items[i].productDetails.productName;
+			productNameCol.textContent = products.find(
+				(product) => product.code == Object.keys(sc)[i]
+			).name;
 			row.appendChild(productNameCol);
 
 			let productPriceCol = document.createElement("td");
@@ -84,13 +88,16 @@ shoppingCart.addEventListener("click", () => {
 			productPriceCol.textContent = new Intl.NumberFormat("th-TH", {
 				style: "currency",
 				currency: "THB",
-			}).format(sc.items[i].price);
+			}).format(
+				products.find((product) => product.code == Object.keys(sc)[i])
+					.price
+			);
 			productPriceCol.style = "text-align: center;";
 			row.appendChild(productPriceCol);
 
 			let productQuantityCol = document.createElement("td");
 			productQuantityCol.className = "product-quantity-col";
-			productQuantityCol.textContent = sc.items[i].quantity;
+			productQuantityCol.textContent = sc[`${Object.keys(sc)[i]}`];
 			productQuantityCol.style = "text-align: center;";
 			row.appendChild(productQuantityCol);
 
@@ -99,7 +106,7 @@ shoppingCart.addEventListener("click", () => {
 			totalPriceCol.textContent = new Intl.NumberFormat("th-TH", {
 				style: "currency",
 				currency: "THB",
-			}).format(sc.items[i].totalPrice);
+			}).format(lib.getTotalPrice(Object.keys(sc)[i]));
 			totalPriceCol.style = "text-align: center;";
 			row.appendChild(totalPriceCol);
 
@@ -109,17 +116,18 @@ shoppingCart.addEventListener("click", () => {
 			deleteButton.innerHTML = "&#x1F5D1;";
 			deleteButton.className = "delete-button";
 			deleteButton.addEventListener("click", () => {
-				remove(i);
-				updateTotalQty();
+				let totalQuantity = document.getElementById("total");
+				lib.removeItem(Object.keys(sc)[i]);
+				totalQuantity.innerHTML = `<b>${lib.getTotalQty()}</b>`;
 				deleteRow(i);
 			});
-
 			deleteCol.style = "text-align: center;";
 			deleteCol.appendChild(deleteButton);
 			row.appendChild(deleteCol);
 		}
 	}
 	modal.style.display = "block";
+	console.log(lib.getNetPrice());
 });
 
 let span = document.getElementsByClassName("close")[0];
@@ -134,10 +142,19 @@ window.onclick = function (event) {
 	}
 };
 
-// Clear all products in cart
-const clearAllButton = document.createElement("button");
+// Clear all products button
+let clearAllButton = document.createElement("button");
 clearAllButton.id = "clear-all-products";
 clearAllButton.className = "m-2 p-2 bg-red-500 text-white rounded-lg";
 clearAllButton.innerHTML = "<b>Clear All</b>";
-clearAllButton.addEventListener("click", clearAll);
+clearAllButton.addEventListener("click", () => {
+	let tableBody = document.getElementById("tbody");
+	while (tableBody.firstChild) {
+		tableBody.removeChild(tableBody.lastChild);
+	}
+	let totalQuantity = document.getElementById("total");
+	totalQuantity.innerHTML = "<b>0</b>";
+	lib.clearAll();
+	// console.log("clear all!");
+});
 modalBody.appendChild(clearAllButton);

@@ -1,103 +1,111 @@
 // store in localStorage
+import products from "./products/products.js";
+import CookieUtil from "./cookieUtil.js";
 
-class Cart {
-	#items;
-	#netPrice = 0;
-	#totalQty = 0;
+let shoppingCart = new Object();
 
-	constructor() {
-		this.#items = new Map();
+/**
+ * @returns {number} total quantity in cart
+ */
+function getTotalQty() {
+	if (CookieUtil.getCookie("cart") === null) {
+		return 0;
+	} else {
+		let temp = parseToObj(CookieUtil.getCookie("cart"));
+		return Object.values(temp).reduce((total, qty) => total + qty);
 	}
+}
 
-	get allItems() {
-		return this.#items;
-	}
-
-	get size() {
-		return this.#items.size;
-	}
-
-	get totalQty() {
-		this.#items.forEach((value) => {
-			this.#totalQty += value.quantity;
+function getNetPrice() {
+	if (CookieUtil.getCookie("cart") === null) {
+		return 0;
+	} else {
+		let temp = parseToMap(parseToObj(CookieUtil.getCookie("cart")));
+		let total = 0;
+		temp.forEach((qty, code) => {
+			total +=
+				products.find((product) => product.code == code).price * qty;
 		});
-		return this.#totalQty;
+		return total;
 	}
+}
 
-	get netPrice() {
-		this.#items.forEach((value) => {
-			this.#netPrice += value.price * value.quantity;
-		});
-		return this.#netPrice;
-	}
-
-	/**
-	 * @param {*} id product code
-	 * @param {object} product product details
-	 */
-	add(id, product) {
-		if (arguments.length > 1) {
-			if (this.find(id)) {
-				this.getItem(id).quantity += 1;
-			} else {
-				this.#items.set(id, product);
-				this.getItem(id).quantity = 1;
-			}
+/**
+ * @param {string|number} id product code
+ * @param {object} cart product code and quantity of each product
+ */
+function add(id) {
+	if (CookieUtil.getCookie("cart") === null) {
+		shoppingCart[`${id}`] = 1;
+		CookieUtil.setCookie("cart", JSON.stringify(shoppingCart), 1);
+	} else {
+		let temp = parseToObj(CookieUtil.getCookie("cart"));
+		if (temp.hasOwnProperty(`${id}`)) {
+			temp[`${id}`] += 1;
 		} else {
-			if (this.find(id)) {
-				this.getItem(id).quantity += 1;
-			}
+			temp[`${id}`] = 1;
 		}
-	}
-
-	clearAll() {
-		this.#items.clear();
-	}
-
-	/**
-	 * @param {*} id product code
-	 */
-	remove(id) {
-		return this.#items.delete(id);
-	}
-
-	/**
-	 * @param {*} id product code
-	 */
-	find(id) {
-		return this.#items.has(id);
-	}
-
-	/**
-	 * @param {*} id product code
-	 * @return {object|null} return object or return null if not found
-	 */
-	getItem(id) {
-		return this.find(id) ? this.#items.get(id) : null;
-	}
-
-	/**
-	 * @param {*} id product code
-	 */
-	getTotalPrice(id) {
-		let price = this.getItem(id).price;
-		let quantity = this.getItem(id).quantity;
-		return price * quantity;
+		CookieUtil.setCookie("cart", JSON.stringify(temp), 1);
 	}
 }
 
-let cart = new Cart();
-
-for (let i = 0; i < 5; i++) {
-	cart.add(i + 1, {
-		name: `Item ${i}`,
-		price: 100 * (i + 1),
-	});
+/**
+ * @param {object} obj product code and quantity of each product
+ */
+function parseToMap(obj) {
+	return new Map(Object.entries(obj));
 }
 
-cart.add(5);
-console.log(JSON.stringify(Object.fromEntries(cart.allItems), 0, 2));
-console.log(cart.allItems);
-console.log(cart.totalQty);
-console.log(cart.netPrice);
-console.log(cart.getTotalPrice(5));
+/**
+ * @param {JSON} json JSON format
+ * @returns {object} object from JSON
+ */
+function parseToObj(json) {
+	return JSON.parse(json);
+}
+
+function clearAll() {
+	let temp = parseToObj(CookieUtil.getCookie("cart"));
+	for (const key in temp) {
+		delete temp[key];
+	}
+	CookieUtil.unset("cart");
+}
+
+/**
+ * @param {string|number} id product code
+ */
+function removeItem(id) {
+	let temp = parseToObj(CookieUtil.getCookie("cart"));
+	if (Object.keys(temp).length == 1) {
+		delete temp[`${id}`];
+		CookieUtil.unset("cart");
+	} else {
+		delete temp[`${id}`];
+		CookieUtil.setCookie("cart", JSON.stringify(temp), 1);
+	}
+}
+
+/**
+ * @param {string|number} id product code
+ */
+function getTotalPrice(id) {
+	if (CookieUtil.getCookie("cart") === null) {
+		return 0;
+	} else {
+		let temp = parseToMap(parseToObj(CookieUtil.getCookie("cart")));
+		return (
+			products.find((product) => product.code == id).price * temp.get(id)
+		);
+	}
+}
+
+export {
+	add,
+	clearAll,
+	removeItem,
+	getTotalPrice,
+	getNetPrice,
+	getTotalQty,
+	parseToObj,
+};
