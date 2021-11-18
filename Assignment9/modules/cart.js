@@ -32,7 +32,6 @@ function getNetPrice() {
 
 /**
  * @param {string} id product code
- * @param {object} cart product code and quantity of each product
  */
 function add(id) {
 	if (CookieUtil.getCookie("cart") === null) {
