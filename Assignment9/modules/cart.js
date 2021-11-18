@@ -1,4 +1,4 @@
-// store in localStorage
+// store in Cookies
 import products from "./products/products.js";
 import CookieUtil from "./cookieUtil.js";
 
