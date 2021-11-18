@@ -1,7 +1,7 @@
 // html management file
 
 import products from "./products/products.js";
-import * as lib from "./test.js";
+import * as lib from "./cart.js";
 
 // code here
 let mainBody = document.querySelector("body");

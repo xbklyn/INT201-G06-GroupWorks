@@ -1,5 +1,5 @@
 import CookieUtil from "./cookieUtil.js";
-import * as lib from "./test.js";
+import * as lib from "./cart.js";
 import products from "./products/products.js";
 
 let modalBody = document.querySelector("div.modal-body");
@@ -97,7 +97,7 @@ shoppingCart.addEventListener("click", () => {
 
 			let productQuantityCol = document.createElement("td");
 			productQuantityCol.className = "product-quantity-col";
-			productQuantityCol.textContent = sc[`${Object.keys(sc)[i]}`];
+			productQuantityCol.textContent = sc[Object.keys(sc)[i]];
 			productQuantityCol.style = "text-align: center;";
 			row.appendChild(productQuantityCol);
 
@@ -136,7 +136,7 @@ span.addEventListener("click", () => {
 });
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
+window.onclick = (event) => {
 	if (event.target == modal) {
 		modal.style.display = "none";
 	}

@@ -4,12 +4,12 @@ export default class CookieUtil {
 		let cookieName = `${encodeURIComponent(name)}=`;
 		let cookieStart = document.cookie.indexOf(cookieName);
 		let cookieValue = null;
-		console.log(`cookieName = ${cookieName}`);
+		// console.log(`cookieName = ${cookieName}`);
 		// console.log(`cookieStart = ${cookieStart}`);
 
 		if (cookieStart > -1) {
 			let cookieEnd = document.cookie.indexOf(";", cookieStart);
-			console.log(`cookieEnd = ${cookieEnd}`);
+			// console.log(`cookieEnd = ${cookieEnd}`);
 			if (cookieEnd == -1) {
 				cookieEnd = document.cookie.length;
 			}
@@ -19,7 +19,7 @@ export default class CookieUtil {
 					cookieEnd
 				)
 			);
-			console.log(`cookieValue = ${cookieValue}`);
+			// console.log(`cookieValue = ${cookieValue}`);
 		}
 		return cookieValue;
 	}
@@ -36,7 +36,7 @@ export default class CookieUtil {
 
 		cookieText += `; expires=${expireDate.toUTCString()}`;
 		// cookieText += `; expires=${expires}`;
-		console.log(`cookieText = ${cookieText}`);
+		// console.log(`cookieText = ${cookieText}`);
 		document.cookie = cookieText;
 	}
 
