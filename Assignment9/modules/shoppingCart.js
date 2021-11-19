@@ -144,7 +144,7 @@ window.onclick = (event) => {
 // Clear all products button
 let clearAllButton = document.createElement("button");
 clearAllButton.id = "clear-all-products";
-clearAllButton.className = "m-2 p-2 bg-red-500 text-white rounded-lg";
+clearAllButton.className = "m-2 p-2 bg-red-500 text-white rounded-lg btn btn-outline-primary";
 clearAllButton.innerHTML = "<b>Clear All</b>";
 clearAllButton.addEventListener("click", () => {
 	let tableBody = document.getElementById("tbody");
@@ -157,3 +157,13 @@ clearAllButton.addEventListener("click", () => {
 	// console.log("clear all!");
 });
 modalBody.appendChild(clearAllButton);
+
+// Show net price
+let netPrice = document.getElementById("netprice");
+netPrice.id = "net-price"
+netPrice.className = "m-2 p-2 text-white rounded-lg btn btn-outline-primary";
+netPrice.textContent = "Net price: "+ new Intl.NumberFormat("th-TH", {
+	style: "currency",
+	currency: "THB",
+}).format(lib.getNetPrice());
+table.appendChild(netPrice);
