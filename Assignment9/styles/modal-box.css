@@ -69,6 +69,14 @@ td > img {
 	margin-bottom: -100px;
 }
 
+#net-price {
+	background-color: #30a6b5;
+	position: absolute;
+	margin-right: 1375px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
 .close:hover,
 .close:focus {
 	color: rgb(0, 0, 0);
