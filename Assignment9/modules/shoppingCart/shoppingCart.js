@@ -156,7 +156,7 @@ clearAllButton.addEventListener("click", () => {
 	let totalQuantity = document.getElementById("total");
 	totalQuantity.innerHTML = "<b>0</b>";
 	lib.clearAll();
-	net();
+	showNetPrice();
 	// console.log("clear all!");
 });
 
