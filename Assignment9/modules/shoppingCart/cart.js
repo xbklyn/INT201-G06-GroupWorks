@@ -81,13 +81,15 @@ export function parseToObj(json) {
 }
 
 export function clearAll() {
-	shoppingCart = parseToObj(getCookie(cookieName));
-	for (const key in shoppingCart) {
-		if (shoppingCart.hasOwnProperty(key)) {
-			delete shoppingCart[key];
+	if (getCookie(cookieName) !== null) {
+		shoppingCart = parseToObj(getCookie(cookieName));
+		for (const key in shoppingCart) {
+			if (shoppingCart.hasOwnProperty(key)) {
+				delete shoppingCart[key];
+			}
 		}
+		CookieUtil.unset(cookieName);
 	}
-	CookieUtil.unset(cookieName);
 }
 
 /**

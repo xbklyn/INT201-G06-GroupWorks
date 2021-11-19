@@ -32,6 +32,33 @@ for (const head of heads) {
 	tr.appendChild(th);
 }
 
+function showNetPrice() {
+	let netPrice = document.getElementById("net-price");
+	netPrice.textContent = new Intl.NumberFormat("th-TH", {
+		style: "currency",
+		currency: "THB",
+	}).format(lib.getNetPrice());
+}
+
+// Clear all products button
+let clearAllButton = document.createElement("button");
+clearAllButton.id = "clear-all-products";
+clearAllButton.className =
+	"m-2 p-2 bg-red-500 text-white rounded-lg btn btn-outline-primary";
+clearAllButton.innerHTML = "<b>Clear All</b>";
+clearAllButton.addEventListener("click", () => {
+	let tableBody = document.getElementById("tbody");
+	while (tableBody.firstChild) {
+		tableBody.removeChild(tableBody.lastChild);
+	}
+	let totalQuantity = document.getElementById("total");
+	totalQuantity.innerHTML = "<b>0</b>";
+	lib.clearAll();
+	showNetPrice();
+	// console.log("clear all!");
+});
+modalBody.appendChild(clearAllButton);
+
 function deleteRow(id) {
 	let rw = document.querySelector(`#sc-row-${id + 1}`);
 	rw.remove();
@@ -124,11 +151,15 @@ shoppingCart.addEventListener("click", () => {
 			deleteCol.style = "text-align: center;";
 			deleteCol.appendChild(deleteButton);
 			row.appendChild(deleteCol);
+
+			clearAllButton.style.visibility = "visible";
 		}
+	} else {
+		clearAllButton.style.visibility = "hidden";
 	}
 	modal.style.display = "block";
-	console.log(lib.getNetPrice());
 	showNetPrice();
+	// console.log(lib.getNetPrice());
 });
 
 let span = document.getElementsByClassName("close")[0];
@@ -142,34 +173,3 @@ window.onclick = (event) => {
 		modal.style.display = "none";
 	}
 };
-
-// Clear all products button
-let clearAllButton = document.createElement("button");
-clearAllButton.id = "clear-all-products";
-clearAllButton.className = "m-2 p-2 bg-red-500 text-white rounded-lg btn btn-outline-primary";
-clearAllButton.innerHTML = "<b>Clear All</b>";
-clearAllButton.addEventListener("click", () => {
-	let tableBody = document.getElementById("tbody");
-	while (tableBody.firstChild) {
-		tableBody.removeChild(tableBody.lastChild);
-	}
-	let totalQuantity = document.getElementById("total");
-	totalQuantity.innerHTML = "<b>0</b>";
-	lib.clearAll();
-	showNetPrice();
-	// console.log("clear all!");
-});
-
-modalBody.appendChild(clearAllButton);
-
-function showNetPrice() {
-let netPrice = document.getElementById("netprice");
-netPrice.className = "m-2 p-2 text-white rounded-lg btn btn-outline-primary";
-netPrice.textContent = "Net price: "+ new Intl.NumberFormat("th-TH", {
-	style: "currency",
-	currency: "THB",
-}).format(lib.getNetPrice());
-table.appendChild(netPrice);
-}
-
-// window.location.reload()
