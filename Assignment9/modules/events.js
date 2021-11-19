@@ -1,4 +1,4 @@
-import * as lib from "./cart.js";
+import * as lib from "./shoppingCart/cart.js";
 import products from "./products/products.js";
 
 // toggle search bar

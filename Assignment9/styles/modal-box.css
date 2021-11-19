@@ -63,7 +63,6 @@ td > img {
 #clear-all-products:active {
 	background-color: rgb(224, 30, 30);
 }
-
 #clear-all-products {
 	margin-left: 1375px;
 	margin-bottom: -100px;
@@ -83,3 +82,4 @@ td > img {
 	text-decoration: none;
 	cursor: pointer;
 }
+
