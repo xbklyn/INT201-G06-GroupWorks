@@ -119,6 +119,7 @@ shoppingCart.addEventListener("click", () => {
 				lib.removeItem(Object.keys(sc)[i]);
 				totalQuantity.innerHTML = `<b>${lib.getTotalQty()}</b>`;
 				deleteRow(i);
+				net();
 			});
 			deleteCol.style = "text-align: center;";
 			deleteCol.appendChild(deleteButton);
@@ -127,6 +128,7 @@ shoppingCart.addEventListener("click", () => {
 	}
 	modal.style.display = "block";
 	console.log(lib.getNetPrice());
+	net();
 });
 
 let span = document.getElementsByClassName("close")[0];
@@ -154,19 +156,20 @@ clearAllButton.addEventListener("click", () => {
 	let totalQuantity = document.getElementById("total");
 	totalQuantity.innerHTML = "<b>0</b>";
 	lib.clearAll();
+	net();
 	// console.log("clear all!");
 });
 
 modalBody.appendChild(clearAllButton);
 
-
+function net() {
 let netPrice = document.getElementById("netprice");
-netPrice.id = "net-price"
 netPrice.className = "m-2 p-2 text-white rounded-lg btn btn-outline-primary";
 netPrice.textContent = "Net price: "+ new Intl.NumberFormat("th-TH", {
 	style: "currency",
 	currency: "THB",
 }).format(lib.getNetPrice());
 table.appendChild(netPrice);
+}
 
 // window.location.reload()
