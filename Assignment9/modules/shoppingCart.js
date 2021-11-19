@@ -1,4 +1,3 @@
-import CookieUtil from "./cookieUtil.js";
 import * as lib from "./cart.js";
 import products from "./products/products.js";
 
@@ -43,8 +42,8 @@ const shoppingCart = document.querySelector("#shopping-cart");
 let modal = document.getElementById("modal-box");
 
 shoppingCart.addEventListener("click", () => {
-	if (CookieUtil.getCookie("cart") !== null) {
-		let sc = lib.parseToObj(CookieUtil.getCookie("cart"));
+	if (lib.getCookie(lib.cookieName) !== null) {
+		let sc = lib.parseToObj(lib.getCookie(lib.cookieName));
 		// console.log(JSON.stringify(cart, 0, 2));
 		let tableBody = document.querySelector("#tbody");
 		while (tableBody.firstChild) {

@@ -1,4 +1,7 @@
 export default class CookieUtil {
+	/**
+	 * @param {string} name name of the cookie
+	 */
 	static getCookie(name) {
 		// console.log(`all cookies: ${document.cookie}`);
 		let cookieName = `${encodeURIComponent(name)}=`;
@@ -24,6 +27,11 @@ export default class CookieUtil {
 		return cookieValue;
 	}
 
+	/**
+	 * @param {string} name name of the cookie
+	 * @param {string} value value of the cookie
+	 * @param {number} expires duration of the cookie in days
+	 */
 	static setCookie(name, value, expires) {
 		let cookieText = `${encodeURIComponent(name)}=${encodeURIComponent(
 			value
@@ -40,6 +48,9 @@ export default class CookieUtil {
 		document.cookie = cookieText;
 	}
 
+	/**
+	 * @param {string} name name of the cookie
+	 */
 	static unset(name) {
 		CookieUtil.setCookie(name, "", new Date(0));
 	}
