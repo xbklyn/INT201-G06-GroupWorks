@@ -64,6 +64,11 @@ td > img {
 	background-color: rgb(224, 30, 30);
 }
 
+#clear-all-products {
+	margin-left: 1375px;
+	margin-bottom: -100px;
+}
+
 .close:hover,
 .close:focus {
 	color: rgb(0, 0, 0);
