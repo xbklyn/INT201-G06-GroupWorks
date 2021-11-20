@@ -2,7 +2,7 @@ import * as lib from "./shoppingCart/cart.js";
 import products from "./products/products.js";
 
 // toggle search bar
-document.querySelector(".icon").addEventListener("click", function () {
+document.querySelector(".icon").addEventListener("click", () => {
 	document.querySelector("#search").classList.toggle("active");
 });
 
