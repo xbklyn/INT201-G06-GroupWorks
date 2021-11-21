@@ -29,7 +29,7 @@ export function getTotalQty() {
 		return 0;
 	} else {
 		shoppingCart = parseToObj(getCookie(cookieName));
-		return Object.values(shoppingCart).reduce((total, qty) => total + qty);
+		return Object.values(shoppingCart).reduce((total, qty) => total + qty , 0);
 	}
 }
 
@@ -54,6 +54,8 @@ export function add(id) {
 	if (getCookie(cookieName) === null) {
 		shoppingCart[id] = 1;
 		setCookie(cookieName, JSON.stringify(shoppingCart), 1);
+		let totalQuantity = document.getElementById("total");
+		totalQuantity.innerHTML = `<b>${getTotalQty()}</b>`;
 	} else {
 		shoppingCart = parseToObj(getCookie(cookieName));
 		if (shoppingCart.hasOwnProperty(id)) {
@@ -62,6 +64,8 @@ export function add(id) {
 			shoppingCart[id] = 1;
 		}
 		setCookie(cookieName, JSON.stringify(shoppingCart), 1);
+		let totalQuantity = document.getElementById("total");
+		totalQuantity.innerHTML = `<b>${getTotalQty()}</b>`;
 	}
 }
 
@@ -104,6 +108,17 @@ export function removeItem(id) {
 		delete shoppingCart[id];
 		setCookie(cookieName, JSON.stringify(shoppingCart), 1);
 	}
+}
+
+export function remove(id) {
+	shoppingCart = parseToObj(getCookie(cookieName));
+	shoppingCart[id] -= 1;
+	if(shoppingCart[id] == 0){
+		removeItem(id);
+	}
+	setCookie(cookieName, JSON.stringify(shoppingCart), 1);
+	let totalQuantity = document.getElementById("total");
+	totalQuantity.innerHTML = `<b>${getTotalQty()}</b>`;
 }
 
 /**
