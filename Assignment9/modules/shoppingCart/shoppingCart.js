@@ -67,8 +67,9 @@ function deleteRow(id) {
 // show shopping cart function
 const shoppingCart = document.querySelector("#shopping-cart");
 let modal = document.getElementById("modal-box");
+shoppingCart.addEventListener("click" , showModalBox);
 
-shoppingCart.addEventListener("click", () => {
+function showModalBox() {
 	if (lib.getCookie(lib.cookieName) !== null) {
 		let sc = lib.parseToObj(lib.getCookie(lib.cookieName));
 		// console.log(JSON.stringify(cart, 0, 2));
@@ -122,9 +123,34 @@ shoppingCart.addEventListener("click", () => {
 			row.appendChild(productPriceCol);
 
 			let productQuantityCol = document.createElement("td");
-			productQuantityCol.className = "product-quantity-col";
-			productQuantityCol.textContent = sc[Object.keys(sc)[i]];
-			productQuantityCol.style = "text-align: center;";
+			productQuantityCol.className = "product-quantity-col ";
+
+			let plusBtn = document.createElement("button");
+			plusBtn.className = "plus transition duration-300 ease-in-out inline-block m-1 px-2 text-white rounded-lg bg-green-500 text-lg font-bold hover:bg-green-800 transform hover:scale-110"
+			plusBtn.innerHTML = "+";
+			productQuantityCol.appendChild(plusBtn);
+			plusBtn.addEventListener("click" , () => {
+				lib.add(Object.keys(sc)[i]);
+				showModalBox();
+			})
+			
+			let divQty = document.createElement("div");
+			divQty.className = " px-5 py-1 rounded-lg bg-gray-200 inline-block";
+
+			let qty = document.createElement("p");
+			qty.className = "text-xl font-bold";
+			qty.innerHTML = sc[Object.keys(sc)[i]];
+			divQty.appendChild(qty);
+			productQuantityCol.appendChild(divQty);
+
+			let minusBtn = document.createElement("button");
+			minusBtn.className = "minus transition duration-300 ease-in-out inline-block m-1 px-2.5 text-white rounded-lg bg-red-500 text-lg font-bold hover:bg-red-800 transform hover:scale-110"
+			minusBtn.innerHTML = "-";
+			minusBtn.addEventListener("click" , () => {
+				lib.remove(Object.keys(sc)[i]);
+				showModalBox();
+			})
+			productQuantityCol.appendChild(minusBtn);
 			row.appendChild(productQuantityCol);
 
 			let totalPriceCol = document.createElement("td");
@@ -160,7 +186,7 @@ shoppingCart.addEventListener("click", () => {
 	modal.style.display = "block";
 	showNetPrice();
 	// console.log(lib.getNetPrice());
-});
+}
 
 let span = document.getElementsByClassName("close")[0];
 span.addEventListener("click", () => {
