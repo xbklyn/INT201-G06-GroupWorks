@@ -29,7 +29,10 @@ export function getTotalQty() {
 		return 0;
 	} else {
 		shoppingCart = parseToObj(getCookie(cookieName));
-		return Object.values(shoppingCart).reduce((total, qty) => total + qty , 0);
+		return Object.values(shoppingCart).reduce(
+			(total, qty) => total + qty,
+			0
+		);
 	}
 }
 
@@ -53,9 +56,6 @@ export function getNetPrice() {
 export function add(id) {
 	if (getCookie(cookieName) === null) {
 		shoppingCart[id] = 1;
-		setCookie(cookieName, JSON.stringify(shoppingCart), 1);
-		let totalQuantity = document.getElementById("total");
-		totalQuantity.innerHTML = `<b>${getTotalQty()}</b>`;
 	} else {
 		shoppingCart = parseToObj(getCookie(cookieName));
 		if (shoppingCart.hasOwnProperty(id)) {
@@ -63,10 +63,9 @@ export function add(id) {
 		} else {
 			shoppingCart[id] = 1;
 		}
-		setCookie(cookieName, JSON.stringify(shoppingCart), 1);
-		let totalQuantity = document.getElementById("total");
-		totalQuantity.innerHTML = `<b>${getTotalQty()}</b>`;
 	}
+	setCookie(cookieName, JSON.stringify(shoppingCart), 1);
+	updateTotalQty();
 }
 
 /**
@@ -110,15 +109,18 @@ export function removeItem(id) {
 	}
 }
 
+/**
+ * @param {string} id product code
+ */
 export function remove(id) {
 	shoppingCart = parseToObj(getCookie(cookieName));
 	shoppingCart[id] -= 1;
-	if(shoppingCart[id] == 0){
+	if (shoppingCart[id] == 0) {
 		removeItem(id);
+	} else {
+		setCookie(cookieName, JSON.stringify(shoppingCart), 1);
 	}
-	setCookie(cookieName, JSON.stringify(shoppingCart), 1);
-	let totalQuantity = document.getElementById("total");
-	totalQuantity.innerHTML = `<b>${getTotalQty()}</b>`;
+	updateTotalQty();
 }
 
 /**
@@ -128,10 +130,15 @@ export function getTotalPrice(id) {
 	if (getCookie(cookieName) === null) {
 		return 0;
 	} else {
-		shoppingCart = parseToMap(parseToObj(getCookie(cookieName)));
+		shoppingCart = parseToObj(getCookie(cookieName));
 		return (
 			products.find((product) => product.code == id).price *
-			shoppingCart.get(id)
+			shoppingCart[id]
 		);
 	}
+}
+
+function updateTotalQty() {
+	let totalQuantity = document.getElementById("total");
+	totalQuantity.innerHTML = `<b>${getTotalQty()}</b>`;
 }

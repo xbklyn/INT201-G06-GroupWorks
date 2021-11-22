@@ -67,7 +67,7 @@ function deleteRow(id) {
 // show shopping cart function
 const shoppingCart = document.querySelector("#shopping-cart");
 let modal = document.getElementById("modal-box");
-shoppingCart.addEventListener("click" , showModalBox);
+shoppingCart.addEventListener("click", showModalBox);
 
 function showModalBox() {
 	if (lib.getCookie(lib.cookieName) !== null) {
@@ -126,14 +126,15 @@ function showModalBox() {
 			productQuantityCol.className = "product-quantity-col ";
 
 			let plusBtn = document.createElement("button");
-			plusBtn.className = "plus transition duration-300 ease-in-out inline-block m-1 px-2 text-white rounded-lg bg-green-500 text-lg font-bold hover:bg-green-800 transform hover:scale-110"
+			plusBtn.className =
+				"plus transition duration-300 ease-in-out inline-block m-1 px-2 text-white rounded-lg bg-green-500 text-lg font-bold hover:bg-green-800 transform hover:scale-110";
 			plusBtn.innerHTML = "+";
 			productQuantityCol.appendChild(plusBtn);
-			plusBtn.addEventListener("click" , () => {
+			plusBtn.addEventListener("click", () => {
 				lib.add(Object.keys(sc)[i]);
 				showModalBox();
-			})
-			
+			});
+
 			let divQty = document.createElement("div");
 			divQty.className = " px-5 py-1 rounded-lg bg-gray-200 inline-block";
 
@@ -144,12 +145,16 @@ function showModalBox() {
 			productQuantityCol.appendChild(divQty);
 
 			let minusBtn = document.createElement("button");
-			minusBtn.className = "minus transition duration-300 ease-in-out inline-block m-1 px-2.5 text-white rounded-lg bg-red-500 text-lg font-bold hover:bg-red-800 transform hover:scale-110"
+			minusBtn.className =
+				"minus transition duration-300 ease-in-out inline-block m-1 px-2.5 text-white rounded-lg bg-red-500 text-lg font-bold hover:bg-red-800 transform hover:scale-110";
 			minusBtn.innerHTML = "-";
-			minusBtn.addEventListener("click" , () => {
+			minusBtn.addEventListener("click", () => {
 				lib.remove(Object.keys(sc)[i]);
+				if (lib.getCookie(lib.cookieName) === null) {
+					deleteRow(i);
+				}
 				showModalBox();
-			})
+			});
 			productQuantityCol.appendChild(minusBtn);
 			row.appendChild(productQuantityCol);
 
@@ -172,14 +177,14 @@ function showModalBox() {
 				lib.removeItem(Object.keys(sc)[i]);
 				totalQuantity.innerHTML = `<b>${lib.getTotalQty()}</b>`;
 				deleteRow(i);
+				showModalBox();
 				showNetPrice();
 			});
 			deleteCol.style = "text-align: center;";
 			deleteCol.appendChild(deleteButton);
 			row.appendChild(deleteCol);
-
-			clearAllButton.style.visibility = "visible";
 		}
+		clearAllButton.style.visibility = "visible";
 	} else {
 		clearAllButton.style.visibility = "hidden";
 	}
