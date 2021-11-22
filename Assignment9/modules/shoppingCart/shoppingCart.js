@@ -124,7 +124,7 @@ function showModalBox() {
 			row.appendChild(productPriceCol);
 
 			let productQuantityCol = document.createElement("td");
-			productQuantityCol.className = "product-quantity-col ";
+			productQuantityCol.className = "product-quantity-col text-center";
 
 			let plusBtn = document.createElement("button");
 			plusBtn.className =
