@@ -20,12 +20,10 @@ function checkTheme() {
 
 	if (localStorageTheme === "dark") {
 		document.body.classList.add(localStorageTheme);
-		const themeSwitch = document.getElementById("theme-switch");
-		themeSwitch.checked = true;
+		themeSwitcher.checked = true;
 	} else {
 		document.body.classList.add(localStorageTheme);
-		const themeSwitch = document.getElementById("theme-switch");
-		themeSwitch.checked = false;
+		themeSwitcher.checked = false;
 	}
 }
 
