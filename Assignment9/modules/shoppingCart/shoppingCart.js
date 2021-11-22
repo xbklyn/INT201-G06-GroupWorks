@@ -55,6 +55,7 @@ clearAllButton.addEventListener("click", () => {
 	totalQuantity.innerHTML = "<b>0</b>";
 	lib.clearAll();
 	showNetPrice();
+	clearAllButton.style.visibility = "hidden";
 	// console.log("clear all!");
 });
 modalBody.appendChild(clearAllButton);
