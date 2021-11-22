@@ -105,7 +105,7 @@ function showModalBox() {
 			row.appendChild(productCodeCol);
 
 			let productNameCol = document.createElement("td");
-			productNameCol.className = "product-name-col";
+			productNameCol.className = "product-name-col text-center";
 			productNameCol.textContent = products.find(
 				(product) => product.code == Object.keys(sc)[i]
 			).name;
