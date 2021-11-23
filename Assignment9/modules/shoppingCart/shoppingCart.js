@@ -1,4 +1,4 @@
-import * as lib from "./cart.js";
+import * as lib from "./test.js";
 import products from "../products/products.js";
 import CookieUtil from "../cookieUtil.js";
 
@@ -38,7 +38,7 @@ function showNetPrice() {
 	netPrice.textContent = new Intl.NumberFormat("th-TH", {
 		style: "currency",
 		currency: "THB",
-	}).format(lib.getNetPrice());
+	}).format(lib.shoppingCart.getNetPrice());
 }
 
 // Clear all products button
@@ -54,7 +54,7 @@ clearAllButton.addEventListener("click", () => {
 	}
 	let totalQuantity = document.getElementById("total");
 	totalQuantity.innerHTML = "<b>0</b>";
-	lib.clearAll();
+	lib.shoppingCart.clearAll();
 	showNetPrice();
 	clearAllButton.style.visibility = "hidden";
 	// console.log("clear all!");
@@ -133,7 +133,7 @@ function showModalBox() {
 			plusBtn.innerHTML = "+";
 			productQuantityCol.appendChild(plusBtn);
 			plusBtn.addEventListener("click", () => {
-				lib.add(Object.keys(sc)[i]);
+				lib.shoppingCart.add(Object.keys(sc)[i]);
 				showModalBox();
 			});
 
@@ -151,7 +151,7 @@ function showModalBox() {
 				"minus transition duration-300 ease-in-out inline-block m-1 px-2.5 text-white rounded-lg bg-red-500 text-lg font-bold hover:bg-red-800 transform hover:scale-110";
 			minusBtn.innerHTML = "-";
 			minusBtn.addEventListener("click", () => {
-				lib.remove(Object.keys(sc)[i]);
+				lib.shoppingCart.remove(Object.keys(sc)[i]);
 				if (CookieUtil.getCookie(lib.cookieName) === null) {
 					deleteRow(i);
 				}
@@ -165,7 +165,7 @@ function showModalBox() {
 			totalPriceCol.textContent = new Intl.NumberFormat("th-TH", {
 				style: "currency",
 				currency: "THB",
-			}).format(lib.getTotalPrice(Object.keys(sc)[i]));
+			}).format(lib.shoppingCart.getTotalPrice(Object.keys(sc)[i]));
 			totalPriceCol.style = "text-align: center;";
 			row.appendChild(totalPriceCol);
 
@@ -175,9 +175,8 @@ function showModalBox() {
 			deleteButton.innerHTML = "&#x1F5D1;";
 			deleteButton.className = "delete-button";
 			deleteButton.addEventListener("click", () => {
-				let totalQuantity = document.getElementById("total");
-				lib.removeItem(Object.keys(sc)[i]);
-				totalQuantity.innerHTML = `<b>${lib.getTotalQty()}</b>`;
+				lib.shoppingCart.removeItem(Object.keys(sc)[i]);
+				lib.updateTotalQty();
 				deleteRow(i);
 				showModalBox();
 				showNetPrice();

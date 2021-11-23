@@ -1,4 +1,4 @@
-import * as lib from "./shoppingCart/cart.js";
+import * as lib from "./shoppingCart/test.js";
 import products from "./products/products.js";
 
 // toggle search bar
@@ -27,8 +27,7 @@ const addButton = document.querySelectorAll(".add-to-cart");
 
 for (const [id, btn] of addButton.entries()) {
 	btn.addEventListener("click", () => {
-		lib.add(products[id].code);
-		let totalQuantity = document.getElementById("total");
-		totalQuantity.innerHTML = `<b>${lib.getTotalQty()}</b>`;
+		lib.shoppingCart.add(products[id].code);
+		lib.updateTotalQty();
 	});
 }
