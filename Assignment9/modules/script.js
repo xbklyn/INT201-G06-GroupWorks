@@ -85,7 +85,7 @@ for (const product of products) {
 			? "bg-gray-100 text-gray-300 pointer-events-none"
 			: "bg-purple-400 text-white transition duration-150 ease-in-out"
 	}`;
-	btn.innerHTML = "<b><i>Add</i></b>";
+	btn.innerHTML = "<b>ADD</b>";
 
 	divBtn.appendChild(btn);
 	divDetails.appendChild(divBtn);
