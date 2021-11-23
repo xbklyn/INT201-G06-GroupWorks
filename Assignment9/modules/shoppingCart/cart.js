@@ -1,55 +1,107 @@
 // store in Cookies
+// will change to localStorage soon
 import products from "../products/products.js";
 import CookieUtil from "../cookieUtil.js";
 
-let shoppingCart = new Object();
 export const cookieName = "cart";
 
-/**
- * @returns {number} total quantity in cart
- */
-export function getTotalQty() {
-	if (CookieUtil.getCookie(cookieName) === null) {
-		return 0;
-	} else {
-		shoppingCart = parseToObj(CookieUtil.getCookie(cookieName));
-		return Object.values(shoppingCart).reduce(
-			(total, qty) => total + qty,
-			0
-		);
-	}
-}
-
-export function getNetPrice() {
-	if (CookieUtil.getCookie(cookieName) === null) {
-		return 0;
-	} else {
-		shoppingCart = parseToObj(CookieUtil.getCookie(cookieName));
-		let total = 0;
-		Object.keys(shoppingCart).forEach((id) => {
-			total += getTotalPrice(id);
-		});
-		return total;
-	}
-}
-
-/**
- * @param {string} id product code
- */
-export function add(id) {
-	if (CookieUtil.getCookie(cookieName) === null) {
-		shoppingCart[id] = 1;
-	} else {
-		shoppingCart = parseToObj(CookieUtil.getCookie(cookieName));
-		if (shoppingCart.hasOwnProperty(id)) {
-			shoppingCart[id] += 1;
+export const shoppingCart = {
+	cart: {},
+	/**
+	 * @returns {number} total quantity in the cart
+	 */
+	getTotalQty() {
+		if (CookieUtil.getCookie(cookieName) === null) {
+			return 0;
 		} else {
-			shoppingCart[id] = 1;
+			this.cart = parseToObj(CookieUtil.getCookie(cookieName));
+			return Object.values(this.cart).reduce(
+				(total, qty) => total + qty,
+				0
+			);
 		}
-	}
-	CookieUtil.setCookie(cookieName, JSON.stringify(shoppingCart), 1);
-	updateTotalQty();
-}
+	},
+	getNetPrice() {
+		if (CookieUtil.getCookie(cookieName) === null) {
+			return 0;
+		} else {
+			this.cart = parseToObj(CookieUtil.getCookie(cookieName));
+			let total = 0;
+			Object.keys(this.cart).forEach((id) => {
+				total += this.getTotalPrice(id);
+			});
+			return total;
+		}
+	},
+	/**
+	 * @param {string} id product code
+	 */
+	add(id) {
+		if (CookieUtil.getCookie(cookieName) === null) {
+			this.cart[id] = 1;
+		} else {
+			this.cart = parseToObj(CookieUtil.getCookie(cookieName));
+			if (this.cart.hasOwnProperty(id)) {
+				this.cart[id] += 1;
+			} else {
+				this.cart[id] = 1;
+			}
+		}
+		CookieUtil.setCookie(cookieName, JSON.stringify(this.cart), 1);
+		updateTotalQty();
+	},
+	clearAll() {
+		if (CookieUtil.getCookie(cookieName) !== null) {
+			this.cart = parseToObj(CookieUtil.getCookie(cookieName));
+			for (const key in this.cart) {
+				if (this.cart.hasOwnProperty(key)) {
+					delete this.cart[key];
+				}
+			}
+			CookieUtil.unset(cookieName);
+		}
+	},
+	/**
+	 * @param {string} id product code
+	 */
+	removeItem(id) {
+		this.cart = parseToObj(CookieUtil.getCookie(cookieName));
+		if (Object.keys(this.cart).length == 1) {
+			delete this.cart[id];
+			CookieUtil.unset(cookieName);
+		} else {
+			delete this.cart[id];
+			CookieUtil.setCookie(cookieName, JSON.stringify(this.cart), 1);
+		}
+	},
+	/**
+	 * @param {string} id product code
+	 */
+	remove(id) {
+		this.cart = parseToObj(CookieUtil.getCookie(cookieName));
+		this.cart[id] -= 1;
+		if (this.cart[id] == 0) {
+			this.removeItem(id);
+		} else {
+			CookieUtil.setCookie(cookieName, JSON.stringify(this.cart), 1);
+		}
+		updateTotalQty();
+	},
+	/**
+	 * @param {string} id product code
+	 */
+	getTotalPrice(id) {
+		if (CookieUtil.getCookie(cookieName) === null) {
+			return 0;
+		} else {
+			this.cart = parseToObj(CookieUtil.getCookie(cookieName));
+			return (
+				products.find((product) => product.code == id).price *
+				this.cart[id]
+			);
+		}
+	},
+};
 
 /**
  * @param {string} json JSON string format
@@ -59,62 +111,7 @@ export function parseToObj(json) {
 	return JSON.parse(json);
 }
 
-export function clearAll() {
-	if (CookieUtil.getCookie(cookieName) !== null) {
-		shoppingCart = parseToObj(CookieUtil.getCookie(cookieName));
-		for (const key in shoppingCart) {
-			if (shoppingCart.hasOwnProperty(key)) {
-				delete shoppingCart[key];
-			}
-		}
-		CookieUtil.unset(cookieName);
-	}
-}
-
-/**
- * @param {string} id product code
- */
-export function removeItem(id) {
-	shoppingCart = parseToObj(CookieUtil.getCookie(cookieName));
-	if (Object.keys(shoppingCart).length == 1) {
-		delete shoppingCart[id];
-		CookieUtil.unset(cookieName);
-	} else {
-		delete shoppingCart[id];
-		CookieUtil.setCookie(cookieName, JSON.stringify(shoppingCart), 1);
-	}
-}
-
-/**
- * @param {string} id product code
- */
-export function remove(id) {
-	shoppingCart = parseToObj(CookieUtil.getCookie(cookieName));
-	shoppingCart[id] -= 1;
-	if (shoppingCart[id] == 0) {
-		removeItem(id);
-	} else {
-		CookieUtil.setCookie(cookieName, JSON.stringify(shoppingCart), 1);
-	}
-	updateTotalQty();
-}
-
-/**
- * @param {string} id product code
- */
-export function getTotalPrice(id) {
-	if (CookieUtil.getCookie(cookieName) === null) {
-		return 0;
-	} else {
-		shoppingCart = parseToObj(CookieUtil.getCookie(cookieName));
-		return (
-			products.find((product) => product.code == id).price *
-			shoppingCart[id]
-		);
-	}
-}
-
-function updateTotalQty() {
+export function updateTotalQty() {
 	let totalQuantity = document.getElementById("total");
-	totalQuantity.innerHTML = `<b>${getTotalQty()}</b>`;
+	totalQuantity.innerHTML = `<b>${shoppingCart.getTotalQty()}</b>`;
 }

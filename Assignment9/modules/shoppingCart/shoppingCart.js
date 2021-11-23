@@ -1,4 +1,4 @@
-import * as lib from "./test.js";
+import * as lib from "./cart.js";
 import products from "../products/products.js";
 import CookieUtil from "../cookieUtil.js";
 
