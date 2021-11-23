@@ -91,5 +91,4 @@ for (const product of products) {
 	divDetails.appendChild(divBtn);
 }
 
-let totalQuantity = document.getElementById("total");
-totalQuantity.innerHTML = `<b>${lib.getTotalQty()}</b>`;
+lib.updateTotalQty();
