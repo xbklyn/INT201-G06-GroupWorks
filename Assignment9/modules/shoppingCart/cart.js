@@ -40,11 +40,10 @@ export function getNetPrice() {
 	if (getCookie(cookieName) === null) {
 		return 0;
 	} else {
-		shoppingCart = parseToMap(parseToObj(getCookie(cookieName)));
+		shoppingCart = parseToObj(getCookie(cookieName));
 		let total = 0;
-		shoppingCart.forEach((qty, code) => {
-			total +=
-				products.find((product) => product.code == code).price * qty;
+		Object.keys(shoppingCart).forEach((id) => {
+			total += getTotalPrice(id);
 		});
 		return total;
 	}
@@ -66,13 +65,6 @@ export function add(id) {
 	}
 	setCookie(cookieName, JSON.stringify(shoppingCart), 1);
 	updateTotalQty();
-}
-
-/**
- * @param {object} obj product code and quantity of each product
- */
-function parseToMap(obj) {
-	return new Map(Object.entries(obj));
 }
 
 /**
