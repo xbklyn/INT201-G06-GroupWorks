@@ -6,29 +6,13 @@ let shoppingCart = new Object();
 export const cookieName = "cart";
 
 /**
- * @param {string} name name of cookie
- */
-export function getCookie(name) {
-	return CookieUtil.getCookie(name);
-}
-
-/**
- * @param {string} name name of the cookie
- * @param {string} value value of the cookie
- * @param {number} expires duration of the cookie in days
- */
-function setCookie(name, value, expires) {
-	CookieUtil.setCookie(name, value, expires);
-}
-
-/**
  * @returns {number} total quantity in cart
  */
 export function getTotalQty() {
-	if (getCookie(cookieName) === null) {
+	if (CookieUtil.getCookie(cookieName) === null) {
 		return 0;
 	} else {
-		shoppingCart = parseToObj(getCookie(cookieName));
+		shoppingCart = parseToObj(CookieUtil.getCookie(cookieName));
 		return Object.values(shoppingCart).reduce(
 			(total, qty) => total + qty,
 			0
@@ -37,10 +21,10 @@ export function getTotalQty() {
 }
 
 export function getNetPrice() {
-	if (getCookie(cookieName) === null) {
+	if (CookieUtil.getCookie(cookieName) === null) {
 		return 0;
 	} else {
-		shoppingCart = parseToObj(getCookie(cookieName));
+		shoppingCart = parseToObj(CookieUtil.getCookie(cookieName));
 		let total = 0;
 		Object.keys(shoppingCart).forEach((id) => {
 			total += getTotalPrice(id);
@@ -53,17 +37,17 @@ export function getNetPrice() {
  * @param {string} id product code
  */
 export function add(id) {
-	if (getCookie(cookieName) === null) {
+	if (CookieUtil.getCookie(cookieName) === null) {
 		shoppingCart[id] = 1;
 	} else {
-		shoppingCart = parseToObj(getCookie(cookieName));
+		shoppingCart = parseToObj(CookieUtil.getCookie(cookieName));
 		if (shoppingCart.hasOwnProperty(id)) {
 			shoppingCart[id] += 1;
 		} else {
 			shoppingCart[id] = 1;
 		}
 	}
-	setCookie(cookieName, JSON.stringify(shoppingCart), 1);
+	CookieUtil.setCookie(cookieName, JSON.stringify(shoppingCart), 1);
 	updateTotalQty();
 }
 
@@ -76,8 +60,8 @@ export function parseToObj(json) {
 }
 
 export function clearAll() {
-	if (getCookie(cookieName) !== null) {
-		shoppingCart = parseToObj(getCookie(cookieName));
+	if (CookieUtil.getCookie(cookieName) !== null) {
+		shoppingCart = parseToObj(CookieUtil.getCookie(cookieName));
 		for (const key in shoppingCart) {
 			if (shoppingCart.hasOwnProperty(key)) {
 				delete shoppingCart[key];
@@ -91,13 +75,13 @@ export function clearAll() {
  * @param {string} id product code
  */
 export function removeItem(id) {
-	shoppingCart = parseToObj(getCookie(cookieName));
+	shoppingCart = parseToObj(CookieUtil.getCookie(cookieName));
 	if (Object.keys(shoppingCart).length == 1) {
 		delete shoppingCart[id];
 		CookieUtil.unset(cookieName);
 	} else {
 		delete shoppingCart[id];
-		setCookie(cookieName, JSON.stringify(shoppingCart), 1);
+		CookieUtil.setCookie(cookieName, JSON.stringify(shoppingCart), 1);
 	}
 }
 
@@ -105,12 +89,12 @@ export function removeItem(id) {
  * @param {string} id product code
  */
 export function remove(id) {
-	shoppingCart = parseToObj(getCookie(cookieName));
+	shoppingCart = parseToObj(CookieUtil.getCookie(cookieName));
 	shoppingCart[id] -= 1;
 	if (shoppingCart[id] == 0) {
 		removeItem(id);
 	} else {
-		setCookie(cookieName, JSON.stringify(shoppingCart), 1);
+		CookieUtil.setCookie(cookieName, JSON.stringify(shoppingCart), 1);
 	}
 	updateTotalQty();
 }
@@ -119,10 +103,10 @@ export function remove(id) {
  * @param {string} id product code
  */
 export function getTotalPrice(id) {
-	if (getCookie(cookieName) === null) {
+	if (CookieUtil.getCookie(cookieName) === null) {
 		return 0;
 	} else {
-		shoppingCart = parseToObj(getCookie(cookieName));
+		shoppingCart = parseToObj(CookieUtil.getCookie(cookieName));
 		return (
 			products.find((product) => product.code == id).price *
 			shoppingCart[id]

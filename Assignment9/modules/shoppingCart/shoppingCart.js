@@ -1,5 +1,6 @@
 import * as lib from "./cart.js";
 import products from "../products/products.js";
+import CookieUtil from "../cookieUtil.js";
 
 let modalBody = document.querySelector("div.modal-body");
 let table = document.createElement("table");
@@ -71,8 +72,8 @@ let modal = document.getElementById("modal-box");
 shoppingCart.addEventListener("click", showModalBox);
 
 function showModalBox() {
-	if (lib.getCookie(lib.cookieName) !== null) {
-		let sc = lib.parseToObj(lib.getCookie(lib.cookieName));
+	if (CookieUtil.getCookie(lib.cookieName) !== null) {
+		let sc = lib.parseToObj(CookieUtil.getCookie(lib.cookieName));
 		// console.log(JSON.stringify(cart, 0, 2));
 		let tableBody = document.querySelector("#tbody");
 		while (tableBody.firstChild) {
@@ -151,7 +152,7 @@ function showModalBox() {
 			minusBtn.innerHTML = "-";
 			minusBtn.addEventListener("click", () => {
 				lib.remove(Object.keys(sc)[i]);
-				if (lib.getCookie(lib.cookieName) === null) {
+				if (CookieUtil.getCookie(lib.cookieName) === null) {
 					deleteRow(i);
 				}
 				showModalBox();
